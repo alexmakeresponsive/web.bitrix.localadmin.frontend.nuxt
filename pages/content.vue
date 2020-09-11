@@ -23,13 +23,21 @@ export default {
       content: []
     }
   },
-  async fetch() {
+  mounted: async function() {
+    const tokenCsrf = this.$store.state.token.csrf;
+
     this.content = await fetch(
-        'http://192.168.100.6/api/content/iblock'
-    ).then(res => res.json())
+        'http://192.168.100.6/api/content/iblock',
+        {
+          method: "POST",
+          headers: {
+            'X-CSRF-TOKEN': tokenCsrf
+          }
+        }
+    ).then(res => res.json());
   },
   beforeCreate: async function () {
-    await hookAutchCheck();
+    await hookAutchCheck(this);
   }
 }
 </script>

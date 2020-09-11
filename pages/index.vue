@@ -13,7 +13,8 @@ export default {
     HeaderDefault
   },
   beforeCreate: async function () {
-    await hookAutchCheck();
+
+    await hookAutchCheck(this);
   }
 }
 </script>
