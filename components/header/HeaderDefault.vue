@@ -45,9 +45,9 @@ export default {
           'http://192.168.100.6/api/auth/logout'
       ).then(response => response.json())
           .then(data => {
-            // console.log(data)
+            console.log(data)
               if (data.status == 200) {
-                window.location = '/local/admin/';
+                // window.location = '/local/admin/';
               }
           });
     }

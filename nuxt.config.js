@@ -1,6 +1,9 @@
 export default {
     router: {
-        base:       '/local/admin/client/',
+        base:       '/local/dashboard/',
         // middleware: 'auth',
     },
+    css: [
+        '~/assets/bootstrap.slate.min.css'
+    ]
 }
