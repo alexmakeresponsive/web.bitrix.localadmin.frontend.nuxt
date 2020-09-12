@@ -1,19 +1,31 @@
 <template>
   <div>
-    <header-default></header-default>
-    <h1>home page</h1>
+    <ul>
+      <li>
+        <NuxtLink to="/admin">admin</NuxtLink>
+      </li>
+      <li>
+        <NuxtLink to="/analyst">analyst</NuxtLink>
+      </li>
+      <li>
+        <NuxtLink to="/content/admin">content admin</NuxtLink>
+      </li>
+      <li>
+        <NuxtLink to="/content/manager">content manager</NuxtLink>
+      </li>
+      <li>
+        <NuxtLink to="/owner">owner</NuxtLink>
+      </li>
+    </ul>
   </div>
 </template>
 <script>
-import HeaderDefault from '~/components/header/HeaderDefault.vue'
-import hookAutchCheck from '~/hook/beforeCreate/auth/check'
+import HeaderDefault from '@/components/header/HeaderDefault.vue'
+import hookAutchCheck from '@/hook/beforeCreate/auth/check'
 export default {
   layout: 'default',
-  components: {
-    HeaderDefault
-  },
-  beforeCreate: async function () {
 
+  beforeCreate: async function () {
     await hookAutchCheck(this);
   }
 }

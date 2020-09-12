@@ -1,9 +1,8 @@
 export default {
     router: {
-        base:       '/local/dashboard/',
-        // middleware: 'auth',
+        base: '/local/dashboard/',
     },
     css: [
-        '~/assets/bootstrap.slate.min.css'
+        '~/assets/vendor/twitter/bootstrap.slate.min.css'
     ]
 }

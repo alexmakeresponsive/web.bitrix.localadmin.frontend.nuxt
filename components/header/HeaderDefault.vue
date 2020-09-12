@@ -15,7 +15,7 @@
           <NuxtLink to="/settings">settings page</NuxtLink>
         </li>
       </ul>
-      <p>logoutStatus: {{JSON.stringify(logoutStatus)}}</p>
+<!--      <p>logoutStatus: {{JSON.stringify(logoutStatus)}}</p>-->
     </div>
 
 </template>
