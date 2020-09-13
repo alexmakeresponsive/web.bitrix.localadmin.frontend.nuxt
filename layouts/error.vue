@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import hookAutchCheck from "@/hook/beforeCreate/auth/check";
+
 
 export default {
   props: ['error'],

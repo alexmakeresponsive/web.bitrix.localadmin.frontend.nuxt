@@ -18,32 +18,12 @@
                   </li>-->
                 </ul>
                 <div>
-                  <div class="btn-group">
-                    <button type="button" class="btn-sm btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Пространство(Администратор)
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right">
-                      <button class="dropdown-item" type="button">Владелец</button>
-                      <button class="dropdown-item" type="button">Аналитик</button>
-                      <button class="dropdown-item" type="button">Контент Менеджер</button>
-                      <button class="dropdown-item" type="button">Контент Администратор</button>
-                    </div>
-                  </div>
+                  <space></space>
                 </div>
               </div>
               <div class="col-6" style="padding-left: 7.5px; display: flex; justify-content: space-between; align-items: center;">
                 <div>
-                  <div class="btn-group">
-                    <button type="button" class="btn-sm btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Меню
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-left">
-                      <button class="dropdown-item" type="button">Настройки</button>
-                      <button class="dropdown-item" type="button">О приложении</button>
-                      <button class="dropdown-item" type="button">Имя Фамилия</button>
-                      <button class="dropdown-item" type="button">Выход</button>
-                    </div>
-                  </div>
+                  <menu-main></menu-main>
                 </div>
                 <ul class="nav" style="margin-right: -1rem;">
                   <li class="nav-item">
@@ -62,7 +42,12 @@
   </div>
 </template>
 <script>
+import Space from "@/components/dropdown/Space";
+import MenuMain from "@/components/dropdown/MenuMain";
 export default {
-
+  components: {
+    Space,
+    MenuMain
+  }
 }
 </script>
