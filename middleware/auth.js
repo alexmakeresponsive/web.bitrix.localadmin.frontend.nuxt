@@ -1,33 +1,38 @@
 export default async function ({ store, redirect, route })
 {
-    console.log(route.name);
+    const host = store.state.env.host;
 
     if(!route.name)
     {
-        redirect('/local/dashboard/');
+        redirect(`${host}/local/admin/app/`);
     }
 
     if (store.state.token.csrf.length !== 0)
     {
         return;
     }
-    //
-    // await fetch(
-    //     'http://192.168.100.6/api/auth/check',
-    // ).then(response => {
-    //     console.log(response.json())
-    // })
-    //
-    // return;
-    //
-
-
 
 
     await fetch(
         'http://192.168.100.6/api/auth/check',
     ).then(response => {
-        return response.json();
+        console.log(response)
+
+        if(!response)
+        {
+            redirect(`${host}/local/admin/app/`);
+            return {};
+        }
+
+        if(response.status !== 200)
+        {
+            redirect(`${host}/local/admin/app/`);
+            return {};
+        }
+        else
+        {
+            return response.json();
+        }
     })
         .then(data => {
             // console.log(route);
@@ -35,7 +40,7 @@ export default async function ({ store, redirect, route })
 
             if (data.status !== 200)
             {
-                redirect('/local/dashboard/');
+                redirect(`${host}/local/admin/app/`);
             }
             else
             {
