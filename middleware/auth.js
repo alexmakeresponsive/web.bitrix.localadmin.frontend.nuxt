@@ -1,28 +1,57 @@
+function getSpaceForCheck(pathSplit, store)
+{
+    let spacePathParts = [];
+    let spacePathPartsIndex = 0;
+
+    for(let pathSplitItem of pathSplit)
+    {
+        if (spacePathPartsIndex === 2)
+        {
+            break;
+        }
+
+        spacePathParts.push(pathSplitItem);
+
+        spacePathPartsIndex++;
+    }
+
+    // console.log(pathSplit)
+
+    const spaceRouteMap    = store.state.routes.spaceRouteMap;
+    const spaceRouteMapKey = spacePathParts.join('/');
+
+    return spaceRouteMap[spaceRouteMapKey];
+}
+
 export default async function ({ store, redirect, route })
 {
-    const host = store.state.env.host;
-
-    if(!route.name)
-    {
-        redirect(`${host}/local/admin/app/`);
-        return;
-    }
-
-    if (store.state.token.csrf.length !== 0)
-    {
-        return;
-    }
-
+    // console.log(store.state.spaces.spaceList);
 
     const s1        = route.path.substring(1);
     const pathSplit = s1.split('/');
 
-    // if(pathSplit[0] === 'error' || pathSplit[0].length === 0)
+    if(!route.name)
+    {
+        redirect(`/`);
+        return;
+    }
+
     if(pathSplit[0] === 'error')
     {
         return;
     }
 
+    if(store.state.spaces.spaceList.length !== 0)
+    {
+        const spaceForCheck = getSpaceForCheck(pathSplit, store);
+
+        if(store.state.spaces.spaceList.indexOf(spaceForCheck) === -1 && spaceForCheck)
+        {
+            redirect(`/error/forbidden`);
+        }
+
+        return;
+    }
 
     const formData = new FormData();
 
@@ -92,14 +121,26 @@ export default async function ({ store, redirect, route })
                     break;
                 }
 
+
+                // check access in spaceList
+                const spaceForCheck = getSpaceForCheck(pathSplit, store);
+
+                if(data.spaceList.indexOf(spaceForCheck) === -1 && spaceForCheck)
+                {
+                    redirect(`/error/forbidden`);
+                    return;
+                }
+
                     store.commit('http/updateRedirectPathFirst', redirectPathFirst);
                     store.commit('token/updateCsrf', data.TOKEN_CSRF);
+
+                    store.commit('spaces/updateSpaceList', data.spaceList);
             });
     }
     catch (e)
     {
         console.log(e);
-        alert(e);
+        alert("catch!");
         redirect(`/error/http/error`);
     }
 }
