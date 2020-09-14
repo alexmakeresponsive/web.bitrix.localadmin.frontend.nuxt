@@ -51,7 +51,7 @@ export default async function ({ store, redirect, route })
                 body: formData
             }
         ).then(response => {
-            console.log(response)
+            // console.log(response)
 
             if(!response)
             {

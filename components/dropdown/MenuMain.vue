@@ -4,10 +4,13 @@
       Меню
     </button>
     <div class="dropdown-menu dropdown-menu-left">
-      <button class="dropdown-item" type="button">Настройки</button>
-      <button class="dropdown-item" type="button">О приложении</button>
-      <button class="dropdown-item" type="button">Имя Фамилия</button>
-      <button class="dropdown-item" type="button">Выход</button>
+      <NuxtLink class="dropdown-item" to="/settings">Настройки</NuxtLink>
+      <NuxtLink class="dropdown-item" to="/about">О приложении</NuxtLink>
+      <div class="dropdown-divider"></div>
+      <div class="dropdown-item">
+        Имя Фамилия
+        <NuxtLink to="/logout" type="button">[Выход]</NuxtLink>
+      </div>
     </div>
   </div>
 </template>
