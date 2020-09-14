@@ -1,11 +1,8 @@
 <template>
-  <div>
-    <Nuxt />
-  </div>
+  <p>Server unavailable</p>
 </template>
-
 <script>
 export default {
-  name: "default"
+  layout: 'error-http',
 }
 </script>

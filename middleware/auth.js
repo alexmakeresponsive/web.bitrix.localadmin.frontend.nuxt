@@ -5,10 +5,6 @@ export default async function ({ store, redirect, route })
     if(!route.name)
     {
         redirect(`${host}/local/admin/app/`);
-    }
-
-    if(route.name === 'error')
-    {
         return;
     }
 
@@ -20,6 +16,12 @@ export default async function ({ store, redirect, route })
 
     const s1        = route.path.substring(1);
     const pathSplit = s1.split('/');
+
+    // if(pathSplit[0] === 'error' || pathSplit[0].length === 0)
+    if(pathSplit[0] === 'error')
+    {
+        return;
+    }
 
     let role = "SOMEBODY"
 
@@ -53,45 +55,67 @@ export default async function ({ store, redirect, route })
 
             if(!response)
             {
-                store.commit('http/updateErrorText', "Many request per second& try arain later");
-                redirect(`${host}/local/admin/app/error`);
+                redirect(`/error/http/block`);
                 return {};
             }
 
             if(response.status !== 200)
             {
-                store.commit('http/updateErrorText', "Server unavailable");
-                redirect(`${host}/local/admin/app/error`);
+                redirect(`/error/http/unavailable`);
                 return {};
             }
-            else
-            {
+
                 return response.json();
-            }
         })
             .then(data => {
-                // console.log(route);
                 console.log(data);
+
+                if (!data.hasOwnProperty('status'))
+                {
+                    return;
+                }
 
                 if (data.status !== 200)
                 {
-                    redirect(`${host}/local/admin/app/`);
+                    redirect(`/error/forbidden`);
+                    return;
                 }
-                else
+
+                if(data.status_role !== 200)
                 {
-                    store.commit('token/updateCsrf', data.TOKEN_CSRF);
+                    redirect(`/error/role`);
+                    return;
                 }
+
+                if(data.space === 'SOMEBODY' && pathSplit[0].length !== 0)
+                {
+                    redirect(`/error/role`);
+                    return;
+                }
+
+                let redirectPathFirst = ''
+
+                switch (data.space)
+                {
+                    case "ADMIN":
+                        redirectPathFirst = `/admin`;
+                    break;
+                    case "CONTENT_ADMIN":
+                        redirectPathFirst = `/content/admin`;
+                    break;
+                    default:
+                        redirectPathFirst = `no-redirect`;
+                    break;
+                }
+
+                    store.commit('http/updateRedirectPathFirst', redirectPathFirst);
+                    store.commit('token/updateCsrf', data.TOKEN_CSRF);
             });
     }
     catch (e)
     {
-        console.log(e)
-        // redirect(`${host}/local/admin/app/error`);
-
-        // store.commit('http/updateErrorText', e);
-        // setTimeout(() => {
-        //     redirect(`${host}/local/admin/app/error`);
-        // }, 1000)
-
+        console.log(e);
+        alert(e);
+        redirect(`/error/http/error`);
     }
 }
