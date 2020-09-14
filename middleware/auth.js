@@ -23,24 +23,8 @@ export default async function ({ store, redirect, route })
         return;
     }
 
-    let role = "SOMEBODY"
-
-    switch (pathSplit[0])
-    {
-        case 'admin':
-            role = 'ADMIN'
-        break;
-    }
-
-    switch (pathSplit[0] + '/' + pathSplit[1])
-    {
-        case 'content/admin':
-            role = 'CONTENT_ADMIN'
-        break;
-    }
 
     const formData = new FormData();
-          formData.append('role', role);
 
     try
     {
@@ -87,7 +71,7 @@ export default async function ({ store, redirect, route })
                     return;
                 }
 
-                if(data.space === 'SOMEBODY' && pathSplit[0].length !== 0)
+                if(data.spaceList.length === 0 && pathSplit[0].length !== 0)
                 {
                     redirect(`/error/role`);
                     return;
@@ -95,7 +79,7 @@ export default async function ({ store, redirect, route })
 
                 let redirectPathFirst = ''
 
-                switch (data.space)
+                switch (data.spaceList[0])
                 {
                     case "ADMIN":
                         redirectPathFirst = `/admin`;
