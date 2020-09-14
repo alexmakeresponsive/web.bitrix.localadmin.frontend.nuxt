@@ -82,9 +82,16 @@ export default async function ({ store, redirect, route })
         })
             .then(data => {
                 console.log(data);
+                console.log(route.path);
 
                 if (!data.hasOwnProperty('status'))
                 {
+                    return;
+                }
+
+                if(data.status_authorized === "N" && route.path !== "/redirect/auth/login")
+                {
+                    redirect(`/redirect/auth/login`);
                     return;
                 }
 
