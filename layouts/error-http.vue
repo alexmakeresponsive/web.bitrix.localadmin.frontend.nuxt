@@ -5,7 +5,7 @@
         <div class="jumbotron mt-3">
           <h1 class="display-3">Error</h1>
           <Nuxt />
-          <NuxtLink to="/local/admin/app/">to home</NuxtLink>
+          <NuxtLink to="/">to home</NuxtLink>
         </div>
       </div>
     </div>
