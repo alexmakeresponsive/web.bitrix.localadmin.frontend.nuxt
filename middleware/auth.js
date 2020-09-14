@@ -53,6 +53,11 @@ export default async function ({ store, redirect, route })
         return;
     }
 
+    if(route.path === "/redirect/auth/login")
+    {
+        return;
+    }
+
     if(store.state.spaces.spaceList.length !== 0)
     {
         const spaceForCheck = getSpaceForCheck(pathSplit, store);
@@ -109,7 +114,7 @@ export default async function ({ store, redirect, route })
 
                 if (data.status !== 200)
                 {
-                    redirect(`/error/forbidden`);
+                    redirect(`/error/forbidden?p=1`);
                     return;
                 }
 
