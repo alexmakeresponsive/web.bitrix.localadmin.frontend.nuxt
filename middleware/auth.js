@@ -2,10 +2,20 @@ function getSpaceForCheck(pathSplit, store)
 {
     let spacePathParts = [];
     let spacePathPartsIndex = 0;
+    let spacePathPartsIndexMax;
+
+    if (pathSplit[0] === 'admin')
+    {
+        spacePathPartsIndexMax = 1;
+    }
+    else
+    {
+        spacePathPartsIndexMax = 2;
+    }
 
     for(let pathSplitItem of pathSplit)
     {
-        if (spacePathPartsIndex === 2)
+        if (spacePathPartsIndex === spacePathPartsIndexMax)
         {
             break;
         }
@@ -19,6 +29,8 @@ function getSpaceForCheck(pathSplit, store)
 
     const spaceRouteMap    = store.state.routes.spaceRouteMap;
     const spaceRouteMapKey = spacePathParts.join('/');
+
+    // console.log(spaceRouteMapKey);
 
     return spaceRouteMap[spaceRouteMapKey];
 }
@@ -131,6 +143,9 @@ export default async function ({ store, redirect, route })
 
                 // check access in spaceList
                 const spaceForCheck = getSpaceForCheck(pathSplit, store);
+
+                console.log(pathSplit)
+                console.log(spaceForCheck)
 
                 if(data.spaceList.indexOf(spaceForCheck) === -1 && spaceForCheck)
                 {
