@@ -79,6 +79,9 @@ export default {
   },
   methods: {
     updateCss: async function (id, e) {
+
+      document.body.style.display = 'none';
+
       try
       {
         await fetch(
@@ -104,6 +107,7 @@ export default {
           return response.json();
         })
             .then(data => {
+
               console.log(data);
 
               if(data.status !== 200)
@@ -142,7 +146,16 @@ export default {
 
                 document.head.appendChild(el);
               });
+
+              return {};
             })
+              .then((data => {
+
+                setTimeout(() => {
+                  document.body.style.display = 'block';
+                }, 300)
+
+              }))
       }
       catch (e)
       {

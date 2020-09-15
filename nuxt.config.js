@@ -4,6 +4,7 @@ export default {
         middleware: ['auth', 'role']
     },
     css: [
+        '~/assets/current/main.css',
         '~/assets/vendor/twitter/bootstrap.slate.min.css'
     ],
 
