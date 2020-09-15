@@ -1,7 +1,7 @@
 export default {
     router: {
         base: '/local/admin/app/',
-        middleware: ['auth', 'role']
+        middleware: ['auth', 'role', 'lang']
     },
     css: [
         '~/assets/current/main.css',

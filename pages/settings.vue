@@ -38,8 +38,8 @@
                               <a class="btn text-light dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                                 Язык</a>
                               <div class="dropdown-menu" style="">
-                                <span class="dropdown-item" v-on:click="updateLang(item.data.id, $event)" v-for="item in langMap">
-                                  {{ item.data.title }}
+                                <span class="dropdown-item" v-on:click="updateLang(item.id, $event)" v-for="item in langHead">
+                                  {{ item.title }}
                                 </span>
                               </div>
                             </div>
@@ -74,7 +74,7 @@ export default {
   data: () => {
     return {
       cssMap:  {},
-      langMap: {}
+      langHead: {}
     }
   },
   methods: {
@@ -213,7 +213,7 @@ export default {
 
         return response.json();
       })
-          .then(data => {
+          .then(async data => {
             console.log(data);
 
             if(data.status !== 200)
@@ -222,7 +222,7 @@ export default {
               return;
             }
 
-            this.langMap = data.langMap;
+            this.langHead = data.langHead;
           });
     }
     catch (e)
