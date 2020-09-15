@@ -137,66 +137,6 @@
             </div>
           </div>
 
-          <!--<div class="card text-white bg-secondary mb-3">
-            <div class="card-header">Основное ПО</div>
-            <div class="card-body">
-              <div class="card text-white bg-primary mb-3">
-                <div class="card-header">PHP</div>
-                <div class="card-body">
-                  <table class="table">
-                    <thead>
-                    <tr>
-                      <th scope="col">First</th>
-                      <th scope="col">Last</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                    </tr>
-                    <tr>
-                      <td>Jacob</td>
-                      <td>Thornton</td>
-                    </tr>
-                    <tr>
-                      <td>Larry</td>
-                      <td>the Bird</td>
-                    </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <div class="card text-white bg-primary mb-3">
-                <div class="card-header">MySQL</div>
-                <div class="card-body">
-                  <table class="table">
-                    <thead>
-                    <tr>
-                      <th scope="col">First</th>
-                      <th scope="col">Last</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                    </tr>
-                    <tr>
-                      <td>Jacob</td>
-                      <td>Thornton</td>
-                    </tr>
-                    <tr>
-                      <td>Larry</td>
-                      <td>the Bird</td>
-                    </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>-->
-
         </div>
       </div>
     </div>

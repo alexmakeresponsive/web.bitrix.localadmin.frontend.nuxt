@@ -11,8 +11,8 @@
               <p>
                 This opensourse software
               </p>
-              <p>current version: 1.0.0-dev</p>
-              <p>&#9400; Copyright 2020</p>
+              <p>version: 1.0.0-dev</p>
+              <p>Designed in 2020 year</p>
               <NuxtLink to="../" class="btn btn-primary">Назад</NuxtLink>
             </div>
           </div>
