@@ -61,7 +61,7 @@
               </div>
             </div>
 
-            <button type="submit" class="btn btn-primary">Save</button>
+            <NuxtLink to="../" class="btn btn-primary">Назад</NuxtLink>
           </div>
         </div>
       </div>

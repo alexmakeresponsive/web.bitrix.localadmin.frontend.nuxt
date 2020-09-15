@@ -13,6 +13,7 @@
               </p>
               <p>current version: 1.0.0-dev</p>
               <p>&#9400; Copyright 2020</p>
+              <NuxtLink to="../" class="btn btn-primary">Назад</NuxtLink>
             </div>
           </div>
         </div>
