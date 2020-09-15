@@ -1,0 +1,25 @@
+{
+  "title": "English",
+  "id": "en",
+  "page": {
+    "settings": {
+      "title": "Settings",
+      "tabs": {
+        "title": [
+          "Appearance"
+        ],
+        "body": [
+          {
+            "dropdown": {
+              "css":  "Theme",
+              "lang": "Lang"
+            }
+          }
+        ]
+      },
+      "button": {
+        "back": "Back"
+      }
+    }
+  }
+}

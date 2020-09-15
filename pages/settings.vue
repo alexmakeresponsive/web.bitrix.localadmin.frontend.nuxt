@@ -57,6 +57,7 @@
 </template>
 <script>
 import getDataLang from "@/shared/lang/getData";
+import updateData from "@/shared/lang/updateData";
 export default {
   layout: 'default',
   data: () => {
@@ -156,8 +157,14 @@ export default {
         alert("catch!");
       }
     },
-    updateLang: function (id, e) {
-      console.log(id);
+    updateLang: async function (id, e) {
+      const text = await updateData(id, 'settings');
+
+      if (text)
+      {
+        localStorage.setItem('langCurrent', id);
+        this.lang.text = text;
+      }
     },
   },
   beforeCreate: async function() {
@@ -167,8 +174,12 @@ export default {
 
   },
   mounted: async function() {
-    this.langCurrent = localStorage.getItem('langCurrent');
-    this.lang.text = await getDataLang(this.langCurrent, 'settings');
+    const text = await getDataLang('settings');
+
+    if (text)
+    {
+      this.lang.text = text;
+    }
 
 
     try
