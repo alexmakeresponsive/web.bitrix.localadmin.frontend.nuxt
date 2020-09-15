@@ -41,7 +41,182 @@
     },
     "conent": {
       "admin": {
-
+        "create": {
+          "structure": {
+            "iblock": {
+              "head": "Добавление Info-блока"
+            }
+          }
+        },
+        "edit": {
+          "data": {
+            "iblock": {
+              "block": {
+                "head": "Info-блоки",
+                "table": {
+                  "head": [
+                    "id",
+                    "Название"
+                  ]
+                }
+              },
+              "element": {
+                "head": "Элементы Info-блока",
+                "button": "Добавить элемент",
+                "table": {
+                  "head": [
+                    "id",
+                    "Название"
+                  ]
+                }
+              }
+            },
+            "hlblock": {
+              "block": {
+                "head": "Highload-блоки",
+                "table": {
+                  "head": [
+                    "id",
+                    "Название"
+                  ]
+                }
+              },
+              "element": {
+                "head": "Элементы Highload-блока",
+                "button": "Добавить элемент",
+                "table": {
+                  "head": [
+                    "id",
+                    "Название"
+                  ]
+                }
+              }
+            }
+          },
+          "shop": {
+            "catalog": {
+              "block": {
+                "head": "Каталоги"
+              },
+              "section": {
+                "head": "Разделы",
+                "button": "Добавить раздел"
+              },
+              "element": {
+                "head": "Элементы каталога",
+                "button": "Добавить элемент",
+                "table": {
+                  "head": [
+                    "id",
+                    "Название"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "data": {
+          "iblock": {
+            "head": "Info-блоки",
+            "table": {
+              "head": [
+                "id",
+                "Название"
+              ]
+            }
+          },
+          "hlblock": {
+            "head": "Highload-блоки",
+            "table": {
+              "head": [
+                "id",
+                "Название"
+              ]
+            }
+          }
+        },
+        "galery": {
+          
+        },
+        "hlblock": {
+          
+        },
+        "iblock": {
+          
+        },
+        "index": {
+          "cards": {
+            "hlblock": {
+              "title": "Highload-блоки"
+            },
+            "iblock": {
+              "title": "Info-блоки"
+            },
+            "event": {
+              "title": "Журнал событий"
+            }
+          }
+        },
+        "journal": {
+          
+        },
+        "marketplace": {
+          
+        },
+        "page": {
+          
+        },
+        "service": {
+          
+        },
+        "shop": {
+          "marketing": {
+            "head": "Маркетинг",
+            "menu": {
+              "items": [
+                "Предустановленный список маркетинговых акций",
+                "Правила работы с корзиной",
+                "Купоны"
+              ]
+            }
+          },
+          "shop": {
+            "head": "Товары"
+          }
+        },
+        "structure": {
+          "iblock": {
+            "title": "Info-блоки",
+            "button-1": "Добавить Info-блок",
+            "button-2": "Добавить тип",
+            "table": {
+              "head": [
+                "id",
+                "Название"
+              ]
+            }
+          },
+          "hlblock": {
+            "title": "Highload-блоки",
+            "button-1": "Добавить Highload-блок",
+            "table": {
+              "head": [
+                "id",
+                "Название"
+              ]
+            }
+          },
+          "user-fields": {
+            "title": "Пользовательские поля",
+            "button-1": "Добавить поле",
+            "table": {
+              "head": [
+                "id",
+                "Название"
+              ]
+            }
+          }
+        }
       }
     },
     "admin": {
@@ -196,6 +371,7 @@
           },
           "top-right": {
             "items": [
+              "Структура",
               "Журнал событий"
             ]
           },

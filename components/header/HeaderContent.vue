@@ -21,6 +21,9 @@
                 </div>
                 <ul class="nav" style="margin-right: -1rem;">
                   <li class="nav-item">
+                    <NuxtLink to="/content/admin/structure" class="nav-link active">Структура</NuxtLink>
+                  </li>
+                  <li class="nav-item">
                     <NuxtLink to="/content/admin/journal" class="nav-link active">Журнал событий</NuxtLink>
                   </li>
                 </ul>
@@ -40,9 +43,6 @@
                   </li>
                 </ul>
                 <ul class="nav" style="margin-right: -1rem;">
-                  <!--<li class="nav-item">
-                    <NuxtLink to="/content/admin/structure" class="nav-link active">Структура</NuxtLink>
-                  </li>-->
                   <li class="nav-item">
                     <NuxtLink to="/content/admin/marketplace" class="nav-link active">Marketplace</NuxtLink>
                   </li>
