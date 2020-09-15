@@ -10,10 +10,10 @@ export default async function ({ store, redirect, route })
         cache.add(new Request(request));
     }
 
+    const langCurrent = localStorage.getItem('langCurrent');
 
-    // const response = await caches.match(request);
-    //
-    //       response.json().then(data => {
-    //         console.log(data);
-    //       });
+    if (!langCurrent)
+    {
+        localStorage.setItem('langCurrent', 'ru');
+    }
 }

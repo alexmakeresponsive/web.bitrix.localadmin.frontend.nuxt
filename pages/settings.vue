@@ -3,65 +3,52 @@
     <div class="row">
       <div class="col-6 offset-3">
         <div class="card text-white bg-secondary border-light mt-3">
-          <div class="card-header text-center">Настройки</div>
+          <div class="card-header text-center">{{lang.text.title}}</div>
           <div class="card-body">
-
+            <!--tab title-->
             <ul class="nav">
-              <li class="nav-item nav-pills nav-fill">
-                <a class="nav-link" data-toggle="tab" href="#home">Внешний вид</a>
+              <li class="nav-item nav-pills nav-fill" v-for="val in lang.text.tabs.title">
+                <a class="nav-link" data-toggle="tab" href="#home">{{val}}</a>
               </li>
-              <li class="nav-item nav-pills nav-fill" style="margin-left: 15px;">
-                <a class="nav-link" data-toggle="tab" href="#profile">Profile</a>
-              </li>
-
             </ul>
+            <!--tab title-->
             <div id="myTabContent" class="tab-content mt-3 mb-3">
+              <!--tab-->
               <div class="tab-pane fade show active" id="home">
                 <div class="card text-white bg-primary">
                   <div class="card-body">
-                    <div class="">
-
-                        <div class="form-row">
-                          <div class="form-group col-md-6">
-                            <div class=" dropdown">
-                              <a class="btn text-light dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                Тема</a>
-                              <div class="dropdown-menu" style="">
-                                <span class="dropdown-item" v-on:click="updateCss(item.id, $event)" v-for="item in cssMap">
-                                  {{ item.name }}
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="form-group col-md-6">
-                            <div class=" dropdown">
-                              <a class="btn text-light dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                Язык</a>
-                              <div class="dropdown-menu" style="">
-                                <span class="dropdown-item" v-on:click="updateLang(item.id, $event)" v-for="item in langHead">
-                                  {{ item.title }}
-                                </span>
-                              </div>
+                      <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <div class=" dropdown">
+                            <a class="btn text-light dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                              {{lang.text.tabs.body[0].dropdown.css}}</a>
+                            <div class="dropdown-menu" style="">
+                              <span class="dropdown-item" v-on:click="updateCss(item.id, $event)" v-for="item in cssMap">
+                                {{ item.name }}
+                              </span>
                             </div>
                           </div>
                         </div>
-
-                    </div>
+                        <div class="form-group col-md-6">
+                          <div class=" dropdown">
+                            <a class="btn text-light dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                              {{lang.text.tabs.body[0].dropdown.lang}}</a>
+                            <div class="dropdown-menu" style="">
+                              <span class="dropdown-item" v-on:click="updateLang(item.id, $event)" v-for="item in lang.data">
+                                {{ item.title }}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                   </div>
                 </div>
               </div>
-              <div class="tab-pane fade" id="profile">
-                <div class="card text-white bg-primary">
-                  <div class="card-body">
-                    <div class="">
-
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <!--tab-->
             </div>
-
-            <NuxtLink to="../" class="btn btn-primary">Назад</NuxtLink>
+            <!--back-->
+            <NuxtLink to="../" class="btn btn-primary">{{lang.text.button.back}}</NuxtLink>
+            <!--back-->
           </div>
         </div>
       </div>
@@ -69,12 +56,39 @@
   </div>
 </template>
 <script>
+import getDataLang from "@/shared/lang/getData";
 export default {
   layout: 'default',
   data: () => {
+    // console.log("data init");
+
     return {
-      cssMap:  {},
-      langHead: {}
+      cssMap:   {},
+
+      langCurrent: 'ru',
+
+      lang: {
+        data: {},
+        text: {
+          "title": "",
+          "tabs": {
+            "title": [
+              ""
+            ],
+            "body": [
+              {
+                "dropdown": {
+                  "css":  "",
+                  "lang": ""
+                }
+              }
+            ]
+          },
+          "button": {
+            "back": ""
+          }
+        }
+      }
     }
   },
   methods: {
@@ -146,7 +160,16 @@ export default {
       console.log(id);
     },
   },
+  beforeCreate: async function() {
+
+  },
+  beforeMount: async function() {
+
+  },
   mounted: async function() {
+    this.langCurrent = localStorage.getItem('langCurrent');
+    this.lang.text = await getDataLang(this.langCurrent, 'settings');
+
     try
     {
       await fetch(
@@ -222,7 +245,7 @@ export default {
               return;
             }
 
-            this.langHead = data.langHead;
+            this.lang.data = data.langHead;
           });
     }
     catch (e)
@@ -230,6 +253,7 @@ export default {
       console.log(e);
       alert("catch!");
     }
+
   }
 }
 </script>
