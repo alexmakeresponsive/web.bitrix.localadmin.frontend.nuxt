@@ -2,6 +2,24 @@
   "title": "English",
   "id": "en",
   "page": {
+    "index": {
+      "head":   "Welcome",
+      "title":  "Welcome to Local Admin",
+      "line-1": "Sign in on",
+      "link-1": "this page",
+      "line-2": "Then you will be redirected on private pages"
+    },
+    "about": {
+      "head":   "About",
+      "title":  "Control panel Local Admin",
+      "line-1": "Designed for 1C-Bitrix",
+      "line-2": "Opensource software",
+      "line-3": "version: 1.0.0-dev",
+      "line-4": "Designed in 2020 year",
+      "button": {
+        "back": "Back"
+      }
+    },
     "settings": {
       "title": "Settings",
       "tabs": {
@@ -20,6 +38,382 @@
       "button": {
         "back": "Back"
       }
+    },
+    "conent": {
+      "admin": {
+        "create": {
+          "structure": {
+            "iblock": {
+              "head": "Add Info-block"
+            }
+          }
+        },
+        "edit": {
+          "data": {
+            "iblock": {
+              "block": {
+                "head": "Info-blocks",
+                "table": {
+                  "head": [
+                    "id",
+                    "Name"
+                  ]
+                }
+              },
+              "element": {
+                "head": "Info-block element",
+                "button": "Add element",
+                "table": {
+                  "head": [
+                    "id",
+                    "Name"
+                  ]
+                }
+              }
+            },
+            "hlblock": {
+              "block": {
+                "head": "Highload-blocks",
+                "table": {
+                  "head": [
+                    "id",
+                    "Name"
+                  ]
+                }
+              },
+              "element": {
+                "head": "Элементы Highload-блока",
+                "button": "Add element",
+                "table": {
+                  "head": [
+                    "id",
+                    "Name"
+                  ]
+                }
+              }
+            }
+          },
+          "shop": {
+            "catalog": {
+              "block": {
+                "head": "Catalogs"
+              },
+              "section": {
+                "head": "Sections",
+                "button": "Add section"
+              },
+              "element": {
+                "head": "Catalog elements",
+                "button": "Add element",
+                "table": {
+                  "head": [
+                    "id",
+                    "Name"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "data": {
+          "iblock": {
+            "head": "Info-blocks",
+            "table": {
+              "head": [
+                "id",
+                "Name"
+              ]
+            }
+          },
+          "hlblock": {
+            "head": "Highload-blocks",
+            "table": {
+              "head": [
+                "id",
+                "Name"
+              ]
+            }
+          }
+        },
+        "galery": {
+
+        },
+        "hlblock": {
+
+        },
+        "iblock": {
+
+        },
+        "index": {
+          "cards": {
+            "hlblock": {
+              "title": "Highload-blocks"
+            },
+            "iblock": {
+              "title": "Info-blocks"
+            },
+            "event": {
+              "title": "Event journal"
+            }
+          }
+        },
+        "journal": {
+
+        },
+        "marketplace": {
+
+        },
+        "page": {
+
+        },
+        "service": {
+
+        },
+        "shop": {
+          "marketing": {
+            "head": "Marketing",
+            "menu": {
+              "items": [
+                "Preset list of marketing promotions",
+                "Shopping cart rules",
+                "Coupons"
+              ]
+            }
+          },
+          "shop": {
+            "head": "Goods"
+          }
+        },
+        "structure": {
+          "iblock": {
+            "title": "Info-blocks",
+            "button-1": "Add Info-block",
+            "button-2": "Add type",
+            "table": {
+              "head": [
+                "id",
+                "Name"
+              ]
+            }
+          },
+          "hlblock": {
+            "title": "Highload-blocks",
+            "button-1": "Add Highload-block",
+            "table": {
+              "head": [
+                "id",
+                "Name"
+              ]
+            }
+          },
+          "user-fields": {
+            "title": "User fields",
+            "button-1": "Add field",
+            "table": {
+              "head": [
+                "id",
+                "Name"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "admin": {
+      "about": {
+
+      },
+      "backup": {
+        "list": {
+          "title": "List of backup copy",
+          "button": "Create backup",
+          "table": {
+            "head": [
+              "Name",
+              "Size"
+            ]
+          }
+        },
+        "journal": {
+          "title": "Journal of create backup",
+          "button": "Экспорт",
+          "table": {
+            "head": [
+              "User",
+              "Date",
+              "Copy type"
+            ]
+          }
+        }
+      },
+      "diagnostic": {
+
+      },
+      "index": {
+        "cards": {
+          "users": {
+            "title": "Users online",
+            "table": {
+              "title": [
+                "Public",
+                "Admin"
+              ],
+              "head": [
+                "id",
+                "Login",
+                "Group",
+                "Action"
+              ]
+            }
+          },
+          "event": {
+            "title": "Event journal"
+          },
+          "hardware": {
+            "title": "Hardware",
+            "cards": [
+              {
+                "title": "Memory"
+              },
+              {
+                "title": "CPU"
+              }
+            ]
+          },
+          "db": {
+            "title": "Databases",
+            "cards": [
+
+            ]
+          },
+          "disk": {
+            "title": "Storage",
+            "cards": [
+
+            ]
+          }
+        }
+      },
+      "abomarketplaceut": {
+
+      },
+      "settings": {
+
+      },
+      "users": {
+        "users": {
+          "title": "Users",
+          "button": "Add user",
+          "table": {
+            "head": [
+              "id",
+              "Login",
+              "Group"
+            ]
+          }
+        },
+        "groups": {
+          "title": "Groups",
+          "button": "Add group",
+          "table": {
+            "head": [
+              "id",
+              "Name"
+            ]
+          }
+        }
+      }
+    },
+    "error": {
+      "forbidden": {
+        "line-1": "Forbidden"
+      },
+      "role": {
+        "line-1": "You don't have permission for this section of Local Admin"
+      },
+      "http": {
+        "block": {
+          "line-1": ">Many request per second& try arain later"
+        },
+        "error": {
+          "line-1": "Error when send request"
+        },
+        "unavailable": {
+          "line-1": "Server unavailable"
+        }
+      }
+    }
+  },
+  "component": {
+    "header": {
+      "HeaderAdmin": {
+        "menu": {
+          "top-left": {
+            "items": [
+              "Main",
+              "Users"
+            ]
+          },
+          "top-right": {
+            "items": [
+              "Copy backup",
+              "Marketplace"
+            ]
+          }
+        }
+      },
+      "HeaderContent": {
+        "menu": {
+          "top-left": {
+            "items": [
+              "Main"
+            ]
+          },
+          "top-right": {
+            "items": [
+              "Structure",
+              "Event journal"
+            ]
+          },
+          "bottom-left": {
+            "items": [
+              "Data",
+              "Gallery",
+              "Services"
+            ]
+          },
+          "bottom-right": {
+            "items": [
+              "Marketplace",
+              "Shop"
+            ]
+          }
+        }
+      }
+    },
+    "dropdown": {
+      "MenuMain": {
+        "title": "Menu",
+        "items": [
+          "Settingd",
+          "About"
+        ],
+        "link": {
+          "logout": "Log out"
+        }
+      },
+      "Space": {
+        "title": "Space",
+        "items": [
+          "Admin",
+          "Content admin"
+        ]
+      }
+    }
+  },
+  "layout": {
+    "error-http": {
+      "title": "Error"
     }
   }
 }
