@@ -2,7 +2,8 @@
   "name": "local-admin",
   "scripts": {
     "dev": "nuxt --spa",
-    "build": "nuxt build --spa --devtools",
+    "build-help": "nuxt build --help",
+    "build": "nuxt build --spa",
     "generate": "nuxt generate",
     "start": "nuxt start"
   },

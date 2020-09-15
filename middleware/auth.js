@@ -99,7 +99,7 @@ export default async function ({ store, redirect, route })
         })
             .then(data => {
                 console.log(data);
-                console.log(route.path);
+                // console.log(route.path);
 
                 if (!data.hasOwnProperty('status'))
                 {
@@ -149,8 +149,8 @@ export default async function ({ store, redirect, route })
                 // check access in spaceList
                 const spaceForCheck = getSpaceForCheck(pathSplit, store);
 
-                console.log(pathSplit)
-                console.log(spaceForCheck)
+                // console.log(pathSplit)
+                // console.log(spaceForCheck)
 
                 if(data.spaceList.indexOf(spaceForCheck) === -1 && spaceForCheck)
                 {

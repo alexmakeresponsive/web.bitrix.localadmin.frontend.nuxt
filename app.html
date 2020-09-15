@@ -5,6 +5,14 @@
     {{ HEAD }}
 </head>
 <body {{ BODY_ATTRS }}>
+    <script>
+        document.head.querySelectorAll('link').forEach(el => {
+            if(el.href.indexOf('.css') !== -1)
+            {
+                el.href = el.href + "?cache-refresh=" + new Date().getMilliseconds();
+            }
+        });
+    </script>
     <div id="body_wrapper">
         {{ APP }}
     </div>

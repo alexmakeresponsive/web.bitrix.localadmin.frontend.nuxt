@@ -27,10 +27,9 @@
                               <a class="btn text-light dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                                 Тема</a>
                               <div class="dropdown-menu" style="">
-                                <a class="dropdown-item" href="#">Slate</a>
-                                <a class="dropdown-item" href="#">Sandstone</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Separated link</a>
+                                <span class="dropdown-item" v-on:click="updateCss(item.id, $event)" v-for="item in cssMap">
+                                  {{ item.name }}
+                                </span>
                               </div>
                             </div>
                           </div>
@@ -39,10 +38,9 @@
                               <a class="btn text-light dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                                 Язык</a>
                               <div class="dropdown-menu" style="">
-                                <a class="dropdown-item" href="#">Русский</a>
-                                <a class="dropdown-item" href="#">Английский</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Separated link</a>
+                                <span class="dropdown-item" v-on:click="updateLang(item.data.id, $event)" v-for="item in langMap">
+                                  {{ item.data.title }}
+                                </span>
                               </div>
                             </div>
                           </div>
@@ -75,21 +73,171 @@ export default {
   layout: 'default',
   data: () => {
     return {
-      pathLogin: ''
+      cssMap:  {},
+      langMap: {}
     }
   },
-  middleware({ store, redirect }) {
+  methods: {
+    updateCss: async function (id, e) {
+      try
+      {
+        await fetch(
+            'http://192.168.100.6/local/admin/settings/theme/style?q=updateFile&id=' + id,
+            {
+              method: 'GET',
+            }
+        ).then(response => {
+          // console.log(response)
 
-    // const redirectPathFirst = store.state.http.redirectPathFirst;
-    // // console.log(redirectPathFirst)
-    //
-    // if (redirectPathFirst !== "no-redirect")
-    // {
-    //   redirect(redirectPathFirst);
-    // }
+          if(!response)
+          {
+            console.log('many req per sec');
+            return {};
+          }
+
+          if(response.status !== 200)
+          {
+            console.log('server unavailable');
+            return {};
+          }
+
+          return response.json();
+        })
+            .then(data => {
+              console.log(data);
+
+              if(data.status !== 200)
+              {
+                console.log('error in server');
+                return;
+              }
+
+
+              let listTagLink = [];
+
+              document.head.querySelectorAll('link').forEach(el => {
+                if(el.href.indexOf('.css') !== -1)
+                {
+                  listTagLink.push(el.cloneNode());
+
+                  document.head.removeChild(el);
+                }
+              });
+
+              listTagLink.forEach(el => {
+                const pos = el.href.indexOf('?cache-refresh=');
+
+                let hrefNew = '';
+
+                if(pos !== -1)
+                {
+                  hrefNew = el.href.substring(0, pos);
+                }
+                else
+                {
+                  hrefNew = el.href;
+                }
+
+                el.href = hrefNew + "?cache-refresh=" + new Date().getMilliseconds();
+
+                document.head.appendChild(el);
+              });
+            })
+      }
+      catch (e)
+      {
+        console.log(e);
+        alert("catch!");
+      }
+    },
+    updateLang: function (id, e) {
+      console.log(id);
+    },
   },
-  mounted() {
-    this.pathLogin = this.$store.state.env.host + '/local/admin/login/'
+  mounted: async function() {
+    try
+    {
+      await fetch(
+          'http://192.168.100.6/local/admin/settings/theme/style?q=getMap',
+          {
+            method: 'GET',
+          }
+      ).then(response => {
+        // console.log(response)
+
+        if(!response)
+        {
+          console.log('many req per sec');
+          return {};
+        }
+
+        if(response.status !== 200)
+        {
+          console.log('server unavailable');
+          return {};
+        }
+
+        return response.json();
+      })
+          .then(data => {
+            console.log(data);
+
+            if(data.status !== 200)
+            {
+              console.log('error in server');
+              return;
+            }
+
+            this.cssMap = data.cssMap;
+          });
+    }
+    catch (e)
+    {
+      console.log(e);
+      alert("catch!");
+    }
+
+    try
+    {
+      await fetch(
+          'http://192.168.100.6/local/admin/settings/lang?q=getMap',
+          {
+            method: 'GET',
+          }
+      ).then(response => {
+        // console.log(response)
+
+        if(!response)
+        {
+          console.log('many req per sec');
+          return {};
+        }
+
+        if(response.status !== 200)
+        {
+          console.log('server unavailable');
+          return {};
+        }
+
+        return response.json();
+      })
+          .then(data => {
+            console.log(data);
+
+            if(data.status !== 200)
+            {
+              console.log('error in server');
+              return;
+            }
+
+            this.langMap = data.langMap;
+          });
+    }
+    catch (e)
+    {
+      console.log(e);
+      alert("catch!");
+    }
   }
 }
 </script>

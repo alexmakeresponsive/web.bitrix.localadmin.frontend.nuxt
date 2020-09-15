@@ -6,4 +6,8 @@ export default {
     css: [
         '~/assets/vendor/twitter/bootstrap.slate.min.css'
     ],
+
+    build: {
+        extractCSS: true
+    }
 }
