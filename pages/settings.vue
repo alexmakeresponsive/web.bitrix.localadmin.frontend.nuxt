@@ -170,6 +170,7 @@ export default {
     this.langCurrent = localStorage.getItem('langCurrent');
     this.lang.text = await getDataLang(this.langCurrent, 'settings');
 
+
     try
     {
       await fetch(

@@ -7,7 +7,7 @@ export default async function ({ store, redirect, route })
     if (!cacheState)
     {
         cache = await caches.open('lang');
-        cache.add(new Request(request));
+                await cache.add(new Request(request));
     }
 
     const langCurrent = localStorage.getItem('langCurrent');
