@@ -79,9 +79,6 @@ export default {
   },
   methods: {
     updateCss: async function (id, e) {
-
-      document.body.style.display = 'none';
-
       try
       {
         await fetch(
@@ -116,46 +113,28 @@ export default {
                 return;
               }
 
-
-              let listTagLink = [];
-
               document.head.querySelectorAll('link').forEach(el => {
                 if(el.href.indexOf('.css') !== -1)
                 {
-                  listTagLink.push(el.cloneNode());
+                  const pos = el.href.indexOf('?cache-refresh=');
 
-                  document.head.removeChild(el);
+                  let hrefNew = '';
+
+                  if(pos !== -1)
+                  {
+                    hrefNew = el.href.substring(0, pos);
+                  }
+                  else
+                  {
+                    hrefNew = el.href;
+                  }
+
+                  el.href = hrefNew + "?cache-refresh=" + Math.random();
                 }
-              });
-
-              listTagLink.forEach(el => {
-                const pos = el.href.indexOf('?cache-refresh=');
-
-                let hrefNew = '';
-
-                if(pos !== -1)
-                {
-                  hrefNew = el.href.substring(0, pos);
-                }
-                else
-                {
-                  hrefNew = el.href;
-                }
-
-                el.href = hrefNew + "?cache-refresh=" + new Date().getMilliseconds();
-
-                document.head.appendChild(el);
               });
 
               return {};
-            })
-              .then((data => {
-
-                setTimeout(() => {
-                  document.body.style.display = 'block';
-                }, 300)
-
-              }))
+            });
       }
       catch (e)
       {
