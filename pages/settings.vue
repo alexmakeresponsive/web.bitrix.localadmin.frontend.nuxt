@@ -23,7 +23,7 @@
                             <a class="btn text-light dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                               {{lang.text.tabs.body[0].dropdown.css}}</a>
                             <div class="dropdown-menu" style="">
-                              <span class="dropdown-item" v-on:click="updateCss(item.id, $event)" v-for="item in cssMap">
+                              <span class="dropdown-item" v-on:click="updateCss(item.id, $event)" v-for="item in css.data">
                                 {{ item.name }}
                               </span>
                             </div>
@@ -65,7 +65,9 @@ export default {
   layout: 'default',
   data: () => {
     return {
-      cssMap:   {},
+      css: {
+        data: {}
+      },
 
       langCurrent: 'ru',
 
@@ -115,7 +117,7 @@ export default {
       this.lang.text = text;
     }
 
-    this.cssMap    = await getListCss();
+    this.css.data    = await getListCss();
     this.lang.data = await getListLang();
   }
 }

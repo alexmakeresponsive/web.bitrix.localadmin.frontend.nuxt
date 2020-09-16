@@ -14,7 +14,7 @@
         document.head.querySelectorAll('link').forEach(el => {
             if(el.href.indexOf('.css') !== -1)
             {
-                el.href = el.href + "?cache-refresh=" + new Date().getMilliseconds();
+                el.href = el.href + "?cache-refresh=" + Math.random();
             }
         });
     </script>
