@@ -26,14 +26,18 @@
             <div class="card-body">
               <div class="list-group">
                 <NuxtLink to="/content/admin/edit/shop/catalog" class="list-group-item list-group-item-action"
-                          style="margin-bottom: -1px">
+                          style="margin-bottom: -1px"
+                          v-if="lang.text.shop.menu.items[0]"
+                >
                   {{lang.text.shop.menu.items[0].title}}
                 </NuxtLink>
                 <div style="margin-bottom: -1px"
                    v-for="(item, index)  of lang.text.shop.menu.items"
                    v-if="index !== 0"
                 >
-                  <a href="#" class="list-group-item list-group-item-action">{{item.title}}</a>
+                  <a href="#" class="list-group-item list-group-item-action"
+                  >
+                    {{item.title}}</a>
                   <a href="#" class="list-group-item list-group-item-action" v-for="child of item.childs">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{child}}
                   </a>
