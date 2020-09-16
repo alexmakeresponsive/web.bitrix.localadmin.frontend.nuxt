@@ -236,7 +236,7 @@
         },
         "journal": {
           "title": "Journal of create backup",
-          "button": "Экспорт",
+          "button": "Export",
           "table": {
             "head": [
               "User",

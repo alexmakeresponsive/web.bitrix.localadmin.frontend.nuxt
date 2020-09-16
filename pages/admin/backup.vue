@@ -6,15 +6,16 @@
         <div class="col-4" style="padding-right: 7.5px;">
           <div class="card text-white bg-secondary mb-3">
             <div class="card-header" style="display: flex; justify-content: space-between; align-items: center">
-              <span>Список резервных копий</span>
-              <button type="button" class="btn-sm btn-secondary">Создать копию</button>
+              <span>{{lang.text.list.title}}</span>
+              <button type="button" class="btn-sm btn-secondary">{{lang.text.list.button}}</button>
             </div>
             <div class="card-body">
               <table class="table">
                 <thead class="thead-dark">
                 <tr>
-                  <th scope="col">Название</th>
-                  <th scope="col">Размер</th>
+                  <th scope="col" v-for="item of lang.text.list.table.head">
+                    {{item}}
+                  </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -38,16 +39,16 @@
         <div class="col-8" style="padding-left: 7.5px;">
           <div class="card text-white bg-secondary mb-3">
             <div class="card-header" style="display: flex; justify-content: space-between; align-items: center">
-              <span>Журнал резервного копирования</span>
-              <button type="button" class="btn-sm btn-secondary">Экспорт</button>
+              <span>{{lang.text.journal.title}}</span>
+              <button type="button" class="btn-sm btn-secondary">{{lang.text.journal.button}}</button>
             </div>
             <div class="card-body">
               <table class="table">
                 <thead class="thead-dark">
                 <tr>
-                  <th scope="col">Пользователь</th>
-                  <th scope="col">Дата</th>
-                  <th scope="col">Тип копии</th>
+                  <th scope="col" v-for="item of lang.text.journal.table.head">
+                    {{item}}
+                  </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -77,11 +78,46 @@
 </template>
 <script>
 import HeaderAdmin from "@/components/header/HeaderAdmin";
+import getTextLang from "@/shared/lang/getText";
 
 export default {
   layout: 'default',
   components: {
     HeaderAdmin
+  },
+  data: () => {
+    return {
+      lang: {
+        text: {
+          "list": {
+            "title":  "",
+            "button": "",
+            "table": {
+              "head": [
+
+              ]
+            }
+          },
+          "journal": {
+            "title":  "",
+            "button": "",
+            "table": {
+              "head": [
+
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  mounted: async function() {
+    const text = await getTextLang('admin/backup');
+
+    if (text)
+    {
+      this.lang.text = text;
+    }
   }
 }
 </script>

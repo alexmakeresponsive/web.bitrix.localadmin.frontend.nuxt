@@ -58,7 +58,7 @@
 <script>
 import updateDataLang from "@/shared/lang/updateData";
 import updateFileCss  from "@/shared/css/updateFile";
-import getDataLang    from "@/shared/lang/getData";
+import getTextLang    from "@/shared/lang/getText";
 import getListCss     from "@/shared/css/getList";
 import getListLang    from "@/shared/lang/getList";
 export default {
@@ -110,14 +110,14 @@ export default {
     },
   },
   mounted: async function() {
-    const text = await getDataLang('settings');
+    const text = await getTextLang('settings');
 
     if (text)
     {
       this.lang.text = text;
     }
 
-    this.css.data    = await getListCss();
+    this.css.data  = await getListCss();
     this.lang.data = await getListLang();
   }
 }

@@ -1,4 +1,23 @@
-export default async (pageName) =>
+function getText(pageList, pagePath)
+{
+    const pagePathParts = pagePath.split('/');
+
+    let text = null;
+
+    for (let part of pagePathParts)
+    {
+        if(!text)
+        {
+            text = pageList[part];
+            continue;
+        }
+            text = text[part];
+    }
+
+    return text;
+}
+
+export default async (pagePath) =>
 {
     let cache, cacheState, data;
 
@@ -32,5 +51,7 @@ export default async (pageName) =>
         return null;
     }
 
-    return data.langData[langCurrent].data.page[pageName];
+    const text = getText(data.langData[langCurrent].data.page, pagePath);
+
+    return text;
 };
