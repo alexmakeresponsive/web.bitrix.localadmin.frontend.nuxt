@@ -110,7 +110,7 @@ export default {
     },
   },
   mounted: async function() {
-    const text = await getTextLang('settings');
+    const text = await getTextLang('page/settings');
 
     if (text)
     {

@@ -1,20 +1,22 @@
 <template>
   <div class="btn-group">
     <button type="button" class="btn-sm btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Меню
+      {{lang.text.title}}
     </button>
     <div class="dropdown-menu dropdown-menu-left">
-      <NuxtLink class="dropdown-item" to="/settings">Настройки</NuxtLink>
-      <NuxtLink class="dropdown-item" to="/about">О приложении</NuxtLink>
+      <NuxtLink class="dropdown-item" to="/settings">{{lang.text.items[0]}}</NuxtLink>
+      <NuxtLink class="dropdown-item" to="/about">{{lang.text.items[1]}}</NuxtLink>
       <div class="dropdown-divider"></div>
       <div class="dropdown-item">
         Имя Фамилия
-        <span v-on:click="logout" type="button">[Выход]</span>
+        <span v-on:click="logout" type="button">[{{lang.text.link.logout}}]</span>
       </div>
     </div>
   </div>
 </template>
 <script>
+import getTextLang from "@/shared/lang/getText";
+
 export default {
   name: "menu-main",
   methods: {
@@ -74,7 +76,29 @@ export default {
         redirect(`/error/http/error`);
       }
     }
-  }
+  },
+  data: () => {
+    return {
+      lang: {
+        text: {
+          "title": "",
+          "items": [
 
+          ],
+          "link": {
+            "logout": ""
+          }
+        }
+      }
+    }
+  },
+  mounted: async function() {
+    const text = await getTextLang('component/dropdown/MenuMain');
+
+    if (text)
+    {
+      this.lang.text = text;
+    }
+  }
 }
 </script>

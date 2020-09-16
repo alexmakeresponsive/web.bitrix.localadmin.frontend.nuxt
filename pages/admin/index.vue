@@ -179,7 +179,7 @@ export default {
     }
   },
   mounted: async function() {
-    const text = await getTextLang('admin/index');
+    const text = await getTextLang('page/admin/index');
 
     if (text)
     {

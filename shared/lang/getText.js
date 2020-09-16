@@ -46,12 +46,7 @@ export default async (pagePath) =>
         return null;
     }
 
-    if (!data.langData[langCurrent].data.hasOwnProperty('page'))
-    {
-        return null;
-    }
-
-    const text = getText(data.langData[langCurrent].data.page, pagePath);
+    const text = getText(data.langData[langCurrent].data, pagePath);
 
     return text;
 };
