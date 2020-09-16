@@ -6,7 +6,7 @@
         <div class="col-3" style="padding-right: 7.5px;">
           <div class="card text-white bg-secondary mb-3">
             <div class="card-header" style="display: flex; justify-content: space-between; align-items: center">
-              <span>Каталоги</span>
+              <span>{{lang.text.block.head}}</span>
             </div>
             <div class="card-body">
               <div class="list-group">
@@ -18,8 +18,10 @@
           </div>
           <div class="card text-white bg-secondary mb-3">
             <div class="card-header" style="display: flex; justify-content: space-between; align-items: center">
-              <span>Разделы</span>
-              <button type="button" class="btn-sm btn-secondary">Добавить раздел</button>
+              <span>{{lang.text.section.head}}</span>
+              <button type="button" class="btn-sm btn-secondary">
+                {{lang.text.section.button}}
+              </button>
             </div>
             <div class="card-body">
               <div class="list-group">
@@ -42,15 +44,18 @@
         <div class="col-9" style="padding-left: 7.5px;">
           <div class="card text-white bg-secondary mb-3">
             <div class="card-header" style="display: flex; justify-content: space-between; align-items: center">
-              <span>Элементы каталога</span>
-              <button type="button" class="btn-sm btn-secondary">Добавить элемент</button>
+              <span>{{lang.text.element.head}}</span>
+              <button type="button" class="btn-sm btn-secondary">
+                {{lang.text.element.button}}
+              </button>
             </div>
             <div class="card-body">
               <table class="table">
                 <thead class="thead-dark">
                 <tr>
-                  <th scope="col">id</th>
-                  <th scope="col">Название</th>
+                  <th scope="col" v-for="item of lang.text.element.table.head">
+                    {{item}}
+                  </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -77,11 +82,44 @@
 </template>
 <script>
 import HeaderContent from "@/components/header/HeaderContent";
+import getTextLang from "@/shared/lang/getText";
 
 export default {
   layout: 'default',
   components: {
     HeaderContent
+  },
+  data: () => {
+    return {
+      lang: {
+        text: {
+          "block": {
+            "head": ""
+          },
+          "section": {
+            "head": "",
+            "button": ""
+          },
+          "element": {
+            "head": "",
+            "button": "",
+            "table": {
+              "head": [
+
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  mounted: async function() {
+    const text = await getTextLang('page/content/admin/edit/shop/catalog');
+
+    if (text)
+    {
+      this.lang.text = text;
+    }
   }
 }
 </script>

@@ -6,14 +6,15 @@
         <div class="col-6" style="padding-right: 7.5px;">
           <div class="card text-white bg-secondary mb-3">
             <div class="card-header" style="display: flex; justify-content: space-between; align-items: center">
-              <span>Info-блоки</span>
+              <span>{{lang.text.iblock.head}}</span>
             </div>
             <div class="card-body">
               <table class="table">
                 <thead class="thead-dark">
                 <tr>
-                  <th scope="col">id</th>
-                  <th scope="col">Название</th>
+                  <th scope="col" v-for="item of lang.text.iblock.table.head">
+                    {{item}}
+                  </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -35,14 +36,15 @@
         <div class="col-6" style="padding-left: 7.5px;">
           <div class="card text-white bg-secondary mb-3">
             <div class="card-header" style="display: flex; justify-content: space-between; align-items: center">
-              <span>Highload-блоки</span>
+              <span>{{lang.text.hlblock.head}}</span>
             </div>
             <div class="card-body">
               <table class="table">
                 <thead class="thead-dark">
                 <tr>
-                  <th scope="col">id</th>
-                  <th scope="col">Название</th>
+                  <th scope="col" v-for="item of lang.text.hlblock.table.head">
+                    {{item}}
+                  </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -63,11 +65,44 @@
 </template>
 <script>
 import HeaderContent from "@/components/header/HeaderContent";
+import getTextLang from "@/shared/lang/getText";
 
 export default {
   layout: 'default',
   components: {
     HeaderContent
+  },
+  data: () => {
+    return {
+      lang: {
+        text: {
+          "iblock": {
+            "head": "",
+            "table": {
+              "head": [
+
+              ]
+            }
+          },
+          "hlblock": {
+            "head": "",
+            "table": {
+              "head": [
+
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  mounted: async function() {
+    const text = await getTextLang('page/content/admin/data');
+
+    if (text)
+    {
+      this.lang.text = text;
+    }
   }
 }
 </script>

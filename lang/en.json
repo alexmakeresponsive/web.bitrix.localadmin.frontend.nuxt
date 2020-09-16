@@ -39,7 +39,7 @@
         "back": "Back"
       }
     },
-    "conent": {
+    "content": {
       "admin": {
         "create": {
           "structure": {
@@ -61,7 +61,7 @@
                 }
               },
               "element": {
-                "head": "Info-block element",
+                "head": "Info-block elements",
                 "button": "Add element",
                 "table": {
                   "head": [
@@ -82,7 +82,7 @@
                 }
               },
               "element": {
-                "head": "Элементы Highload-блока",
+                "head": "Highload-block elements",
                 "button": "Add element",
                 "table": {
                   "head": [
@@ -181,7 +181,37 @@
             }
           },
           "shop": {
-            "head": "Goods"
+            "head": "Goods",
+            "menu": {
+              "items": [
+                {
+                  "title": "Catalogs"
+                },
+                {
+                  "title": "Orders"
+                },
+                {
+                  "title": "Inventory control",
+                  "childs": [
+                    "Documents",
+                    "Providers",
+                    "Stores"
+                  ]
+                },
+                {
+                  "title": "Delivery services"
+                },
+                {
+                  "title": "Pay systems"
+                },
+                {
+                  "title": "Prices"
+                },
+                {
+                  "title": "Measures"
+                }
+              ]
+            }
           }
         },
         "structure": {

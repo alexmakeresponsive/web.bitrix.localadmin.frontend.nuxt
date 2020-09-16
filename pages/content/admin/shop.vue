@@ -6,18 +6,12 @@
         <div class="col-6" style="padding-right: 7.5px;">
           <div class="card text-white bg-secondary mb-3">
             <div class="card-header" style="display: flex; justify-content: space-between; align-items: center">
-              <span>Магазин: Маркетинг</span>
+              <span>{{lang.text.marketing.head}}</span>
             </div>
             <div class="card-body">
               <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action active">
-                  Предустановленный список маркетинговых акций
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                  Правила работы с корзиной
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                  Купоны
+                <a href="#" class="list-group-item list-group-item-action" v-for="item of lang.text.marketing.menu.items">
+                  {{item}}
                 </a>
               </div>
             </div>
@@ -27,40 +21,24 @@
         <div class="col-6" style="padding-left: 7.5px;">
           <div class="card text-white bg-secondary mb-3">
             <div class="card-header" style="display: flex; justify-content: space-between; align-items: center">
-              <span>Магазин: Товары</span>
+              <span>{{lang.text.shop.head}}</span>
             </div>
             <div class="card-body">
               <div class="list-group">
-                <NuxtLink to="/content/admin/edit/shop/catalog" class="list-group-item list-group-item-action active">
-                  Каталоги
+                <NuxtLink to="/content/admin/edit/shop/catalog" class="list-group-item list-group-item-action"
+                          style="margin-bottom: -1px">
+                  {{lang.text.shop.menu.items[0].title}}
                 </NuxtLink>
-                <a href="#" class="list-group-item list-group-item-action">
-                  Заказы
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                  Складской учет
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Документы
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Поставщики
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Склады
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                  Службы доставки
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                  Платёжные системы
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                  Цены
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                  Единицы измерения
-                </a>
+                <div style="margin-bottom: -1px"
+                   v-for="(item, index)  of lang.text.shop.menu.items"
+                   v-if="index !== 0"
+                >
+                  <a href="#" class="list-group-item list-group-item-action">{{item.title}}</a>
+                  <a href="#" class="list-group-item list-group-item-action" v-for="child of item.childs">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{child}}
+                  </a>
+                </div>
+
               </div>
             </div>
           </div>
@@ -71,11 +49,44 @@
 </template>
 <script>
 import HeaderContent from "@/components/header/HeaderContent";
+import getTextLang from "@/shared/lang/getText";
 
 export default {
   layout: 'default',
   components: {
     HeaderContent
+  },
+  data: () => {
+    return {
+      lang: {
+        text: {
+          "marketing": {
+            "head": "",
+            "menu": {
+              "items": [
+
+              ]
+            }
+          },
+          "shop": {
+            "head": "",
+            "menu": {
+              "items": [
+
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  mounted: async function() {
+    const text = await getTextLang('page/content/admin/shop');
+
+    if (text)
+    {
+      this.lang.text = text;
+    }
   }
 }
 </script>
