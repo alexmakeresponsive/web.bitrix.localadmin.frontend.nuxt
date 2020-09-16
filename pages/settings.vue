@@ -56,13 +56,14 @@
   </div>
 </template>
 <script>
-import getDataLang from "@/shared/lang/getData";
-import updateData from "@/shared/lang/updateData";
+import updateDataLang from "@/shared/lang/updateData";
+import updateFileCss  from "@/shared/css/updateFile";
+import getDataLang    from "@/shared/lang/getData";
+import getListCss     from "@/shared/css/getList";
+import getListLang    from "@/shared/lang/getList";
 export default {
   layout: 'default',
   data: () => {
-    // console.log("data init");
-
     return {
       cssMap:   {},
 
@@ -93,72 +94,11 @@ export default {
     }
   },
   methods: {
-    updateCss: async function (id, e) {
-      try
-      {
-        await fetch(
-            'http://192.168.100.6/local/admin/settings/theme/style?q=updateFile&id=' + id,
-            {
-              method: 'GET',
-            }
-        ).then(response => {
-          // console.log(response)
-
-          if(!response)
-          {
-            console.log('many req per sec');
-            return {};
-          }
-
-          if(response.status !== 200)
-          {
-            console.log('server unavailable');
-            return {};
-          }
-
-          return response.json();
-        })
-            .then(data => {
-
-              console.log(data);
-
-              if(data.status !== 200)
-              {
-                console.log('error in server');
-                return;
-              }
-
-              document.head.querySelectorAll('link').forEach(el => {
-                if(el.href.indexOf('.css') !== -1)
-                {
-                  const pos = el.href.indexOf('?cache-refresh=');
-
-                  let hrefNew = '';
-
-                  if(pos !== -1)
-                  {
-                    hrefNew = el.href.substring(0, pos);
-                  }
-                  else
-                  {
-                    hrefNew = el.href;
-                  }
-
-                  el.href = hrefNew + "?cache-refresh=" + Math.random();
-                }
-              });
-
-              return {};
-            });
-      }
-      catch (e)
-      {
-        console.log(e);
-        alert("catch!");
-      }
+    updateCss: function (id, e) {
+      updateFileCss(id);
     },
     updateLang: async function (id, e) {
-      const text = await updateData(id, 'settings');
+      const text = await updateDataLang(id, 'settings');
 
       if (text)
       {
@@ -166,12 +106,6 @@ export default {
         this.lang.text = text;
       }
     },
-  },
-  beforeCreate: async function() {
-
-  },
-  beforeMount: async function() {
-
   },
   mounted: async function() {
     const text = await getDataLang('settings');
@@ -181,91 +115,8 @@ export default {
       this.lang.text = text;
     }
 
-
-    try
-    {
-      await fetch(
-          'http://192.168.100.6/local/admin/settings/theme/style?q=getMap',
-          {
-            method: 'GET',
-          }
-      ).then(response => {
-        // console.log(response)
-
-        if(!response)
-        {
-          console.log('many req per sec');
-          return {};
-        }
-
-        if(response.status !== 200)
-        {
-          console.log('server unavailable');
-          return {};
-        }
-
-        return response.json();
-      })
-          .then(data => {
-            console.log(data);
-
-            if(data.status !== 200)
-            {
-              console.log('error in server');
-              return;
-            }
-
-            this.cssMap = data.cssMap;
-          });
-    }
-    catch (e)
-    {
-      console.log(e);
-      alert("catch!");
-    }
-
-    try
-    {
-      await fetch(
-          'http://192.168.100.6/local/admin/settings/lang?q=getMap',
-          {
-            method: 'GET',
-          }
-      ).then(response => {
-        // console.log(response)
-
-        if(!response)
-        {
-          console.log('many req per sec');
-          return {};
-        }
-
-        if(response.status !== 200)
-        {
-          console.log('server unavailable');
-          return {};
-        }
-
-        return response.json();
-      })
-          .then(async data => {
-            console.log(data);
-
-            if(data.status !== 200)
-            {
-              console.log('error in server');
-              return;
-            }
-
-            this.lang.data = data.langHead;
-          });
-    }
-    catch (e)
-    {
-      console.log(e);
-      alert("catch!");
-    }
-
+    this.cssMap    = await getListCss();
+    this.lang.data = await getListLang();
   }
 }
 </script>
