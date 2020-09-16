@@ -1,18 +1,9 @@
-export default async (langQuery, pageName) =>
+export default async (langQuery, pageName, store) =>
 {
-    let cache, cacheState, data;
-    const request = 'http://192.168.100.6/local/admin/settings/lang?q=getJson';
-
-         cacheState = await caches.has('lang');
-    if (!cacheState)
-    {
-        return null;
-    }
-
-    const response = await caches.match(request);
+    let data;
 
     try {
-        data = await response.json();
+        data = store.state.lang.text;
     }
     catch (e)
     {
@@ -24,10 +15,5 @@ export default async (langQuery, pageName) =>
         return null;
     }
 
-    if (!data.langData[langQuery].data.hasOwnProperty('page'))
-    {
-        return null;
-    }
-
-    return data.langData[langQuery].data.page[pageName];
+    return data[langQuery].data.page[pageName];
 };

@@ -24,7 +24,7 @@ export default async () => {
             return response.json();
         })
             .then(async data => {
-                console.log(data);
+                // console.log(data);
 
                 if(data.status !== 200)
                 {

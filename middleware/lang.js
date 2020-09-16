@@ -29,7 +29,7 @@ export default async function ({ store, redirect, route })
             return response.json();
         })
             .then(data => {
-                console.log(data);
+                // console.log(data);
 
                 if (!data.hasOwnProperty('status'))
                 {

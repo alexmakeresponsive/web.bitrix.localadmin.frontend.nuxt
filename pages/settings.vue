@@ -102,7 +102,7 @@ export default {
       updateFileCss(id);
     },
     updateLang: async function (id, e) {
-      const text = await updateDataLang(id, 'settings');
+      const text = await updateDataLang(id, 'settings', this.$store);
 
       if (text)
       {
