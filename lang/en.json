@@ -445,5 +445,10 @@
     "error-http": {
       "title": "Error"
     }
+  },
+  "shared": {
+    "button": {
+      "back": "Back"
+    }
   }
 }
