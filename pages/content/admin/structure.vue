@@ -8,7 +8,9 @@
             <div class="card-header" style="display: flex; justify-content: space-between; align-items: center">
               <span>{{lang.text.iblock.title}}</span>
               <div>
-                <NuxtLink to="/content/admin/create/structure/iblock?new=1" class="btn-sm btn-secondary">
+                <NuxtLink to="/content/admin/create/structure/iblock?new=1" class="btn-sm btn-secondary"
+                          style="margin-right: 6px;"
+                >
                   {{lang.text.iblock["button-1"]}}
                 </NuxtLink>
                 <button type="button" class="btn-sm btn-secondary">

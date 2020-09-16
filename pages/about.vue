@@ -13,7 +13,10 @@
               </p>
               <p>{{lang.text["line-3"]}}</p>
               <p>{{lang.text["line-4"]}}</p>
-              <NuxtLink to="../" class="btn btn-primary">{{lang.text.button.back}}</NuxtLink>
+
+              <a class="btn btn-primary" @click="$router.go(-1)">
+                {{lang.text.button.back}}
+              </a>
             </div>
           </div>
         </div>

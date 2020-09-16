@@ -47,7 +47,9 @@
               <!--tab-->
             </div>
             <!--back-->
-            <NuxtLink to="../" class="btn btn-primary">{{lang.text.button.back}}</NuxtLink>
+            <a class="btn btn-primary" @click="$router.go(-1)">
+              {{lang.text.button.back}}
+            </a>
             <!--back-->
           </div>
         </div>
