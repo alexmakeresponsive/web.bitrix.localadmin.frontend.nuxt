@@ -151,7 +151,7 @@ export default {
     }
   },
   mounted: async function() {
-    const text = await getTextLang('page/content/admin/structure');
+    const text = await getTextLang('page/content/admin/structure', this.$store);
 
     if (text)
     {

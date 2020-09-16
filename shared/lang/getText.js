@@ -17,24 +17,14 @@ function getText(pageList, pagePath)
     return text;
 }
 
-export default async (pagePath) =>
+export default async (pagePath, store) =>
 {
-    let cache, cacheState, data;
+    let data;
 
-    const request     = 'http://192.168.100.6/local/admin/settings/lang?q=getJson';
     const langCurrent = localStorage.getItem('langCurrent');
 
-
-         cacheState = await caches.has('lang');
-    if (!cacheState)
-    {
-        return null;
-    }
-
-    const response = await caches.match(request);
-
     try {
-        data = await response.json();
+        data = store.state.lang.text;
     }
     catch (e)
     {
@@ -46,7 +36,7 @@ export default async (pagePath) =>
         return null;
     }
 
-    const text = getText(data.langData[langCurrent].data, pagePath);
+    const text = getText(data[langCurrent].data, pagePath);
 
     return text;
 };

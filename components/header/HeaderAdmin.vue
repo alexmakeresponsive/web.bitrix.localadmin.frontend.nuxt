@@ -71,7 +71,7 @@ export default {
     }
   },
   mounted: async function() {
-    const text = await getTextLang('component/header/HeaderAdmin');
+    const text = await getTextLang('component/header/HeaderAdmin', this.$store);
 
     if (text)
     {

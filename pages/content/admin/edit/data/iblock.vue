@@ -105,7 +105,7 @@ export default {
     }
   },
   mounted: async function() {
-    const text = await getTextLang('page/content/admin/edit/data/iblock');
+    const text = await getTextLang('page/content/admin/edit/data/iblock', this.$store);
 
     if (text)
     {

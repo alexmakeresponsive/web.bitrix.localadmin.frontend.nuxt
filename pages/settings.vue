@@ -112,7 +112,7 @@ export default {
     },
   },
   mounted: async function() {
-    const text = await getTextLang('page/settings');
+    const text = await getTextLang('page/settings', this.$store);
 
     if (text)
     {

@@ -98,7 +98,7 @@ export default {
     }
   },
   mounted: async function() {
-    const text = await getTextLang('component/header/HeaderContent');
+    const text = await getTextLang('component/header/HeaderContent', this.$store);
 
     if (text)
     {

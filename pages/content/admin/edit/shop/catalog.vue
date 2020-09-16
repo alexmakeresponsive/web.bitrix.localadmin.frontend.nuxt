@@ -114,7 +114,7 @@ export default {
     }
   },
   mounted: async function() {
-    const text = await getTextLang('page/content/admin/edit/shop/catalog');
+    const text = await getTextLang('page/content/admin/edit/shop/catalog', this.$store);
 
     if (text)
     {

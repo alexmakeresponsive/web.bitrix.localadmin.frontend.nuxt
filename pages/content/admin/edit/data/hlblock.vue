@@ -97,7 +97,7 @@ export default {
     }
   },
   mounted: async function() {
-    const text = await getTextLang('page/content/admin/edit/data/hlblock');
+    const text = await getTextLang('page/content/admin/edit/data/hlblock', this.$store);
 
     if (text)
     {

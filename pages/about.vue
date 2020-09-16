@@ -50,7 +50,9 @@ export default {
   mounted: async function() {
     this.pathLogin = this.$store.state.env.host + '/local/admin/login/'
 
-    const text = await getTextLang('page/about');
+    const text = await getTextLang('page/about', this.$store);
+
+    console.log(text)
 
     if (text)
     {

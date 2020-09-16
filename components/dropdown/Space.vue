@@ -27,7 +27,7 @@ export default {
     }
   },
   mounted: async function() {
-    const text = await getTextLang('component/dropdown/Space');
+    const text = await getTextLang('component/dropdown/Space', this.$store);
 
     if (text)
     {

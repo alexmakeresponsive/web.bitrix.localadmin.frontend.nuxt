@@ -112,7 +112,7 @@ export default {
     }
   },
   mounted: async function() {
-    const text = await getTextLang('page/admin/backup');
+    const text = await getTextLang('page/admin/backup', this.$store);
 
     if (text)
     {

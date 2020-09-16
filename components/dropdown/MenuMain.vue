@@ -93,7 +93,7 @@ export default {
     }
   },
   mounted: async function() {
-    const text = await getTextLang('component/dropdown/MenuMain');
+    const text = await getTextLang('component/dropdown/MenuMain', this.$store);
 
     if (text)
     {
