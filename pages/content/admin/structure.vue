@@ -3,23 +3,60 @@
     <header-content></header-content>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-12">
+        <!--<div class="col-6" style="padding-right: 7.5px;">
           <div class="card text-white bg-secondary mb-3">
-            <div class="card-header" style="display: flex; justify-content: space-between; align-items: center">
-              <span>{{lang.text.iblock.title}}</span>
+            <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; min-height: 56px;">
+              <span>Типы инфоблоков</span>
               <div>
-                <NuxtLink to="/content/admin/create/structure/iblock?new=1" class="btn-sm btn-secondary"
-                          style="margin-right: 6px;"
-                >
-                  {{lang.text.iblock["button-1"]}}
-                </NuxtLink>
                 <button type="button" class="btn-sm btn-secondary">
                   {{lang.text.iblock["button-2"]}}
                 </button>
               </div>
             </div>
             <div class="card-body">
-              <table class="table">
+              <table class="table" style="margin-bottom: 0;">
+                <thead class="thead-dark">
+                <tr>
+                  <th scope="col" v-for="item of lang.text.iblock.table.head">
+                    {{item}}
+                  </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>
+                    <NuxtLink to="/content/admin/edit/data/iblock?id=1">Каталоги</NuxtLink>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Торговые предложения</td>
+                </tr>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Новости</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>-->
+
+        <div class="col-12" style="padding-left: 15px;">
+          <div class="card text-white bg-secondary mb-3">
+            <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; min-height: 56px;">
+              <span>{{lang.text.iblock.title}}</span>
+              <div>
+                <!--<NuxtLink to="/content/admin/create/structure/iblock?new=1" class="btn-sm btn-secondary"
+                          style="margin-right: 6px;"
+                >
+                  {{lang.text.iblock["button-1"]}}
+                </NuxtLink>-->
+              </div>
+            </div>
+            <div class="card-body">
+              <table class="table" style="margin-bottom: 0;">
                 <thead class="thead-dark">
                 <tr>
                   <th scope="col" v-for="item of lang.text.iblock.table.head">
@@ -47,14 +84,15 @@
             </div>
           </div>
         </div>
+
         <div class="col-12">
           <div class="card text-white bg-secondary mb-3">
-            <div class="card-header" style="display: flex; justify-content: space-between; align-items: center">
+            <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; min-height: 56px;">
               <span>{{lang.text.hlblock.title}}</span>
-              <button type="button" class="btn-sm btn-secondary">{{lang.text.hlblock["button-1"]}}</button>
+<!--              <button type="button" class="btn-sm btn-secondary">{{lang.text.hlblock["button-1"]}}</button>-->
             </div>
             <div class="card-body">
-              <table class="table">
+              <table class="table" style="margin-bottom: 0;">
                 <thead class="thead-dark">
                 <tr>
                   <th scope="col" v-for="item of lang.text.hlblock.table.head">
@@ -74,14 +112,14 @@
             </div>
           </div>
         </div>
-        <div class="col-12">
+        <!--<div class="col-12">
           <div class="card text-white bg-dark border-info  mb-3">
-            <div class="card-header" style="display: flex; justify-content: space-between; align-items: center">
+            <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; min-height: 56px;">
               <span>{{lang.text["user-fields"].title}}</span>
               <button type="button" class="btn-sm btn-secondary">{{lang.text["user-fields"]["button-1"]}}</button>
             </div>
             <div class="card-body">
-              <table class="table">
+              <table class="table" style="margin-bottom: 0;">
                 <thead class="thead-dark">
                 <tr>
                   <th scope="col" v-for="item of lang.text['user-fields'].table.head">
@@ -100,7 +138,7 @@
               </table>
             </div>
           </div>
-        </div>
+        </div>-->
       </div>
     </div>
   </div>

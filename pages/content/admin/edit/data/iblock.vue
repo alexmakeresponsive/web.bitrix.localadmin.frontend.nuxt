@@ -30,6 +30,30 @@
               </table>
             </div>
           </div>
+          <div class="card text-white bg-secondary mb-3">
+            <div class="card-header" style="display: flex; justify-content: space-between; align-items: center">
+              <span>Разделы Info-блока</span>
+              <button type="button" class="btn-sm btn-secondary">
+                Добавить раздел
+              </button>
+            </div>
+            <div class="card-body">
+              <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action active">
+                  Куртки
+                </a>
+                <a href="#" class="list-group-item list-group-item-action active">
+                  Штаны
+                </a>
+                <a href="#" class="list-group-item list-group-item-action active">
+                  Рукавицы
+                </a>
+                <a href="#" class="list-group-item list-group-item-action active">
+                  Сапоги
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="col-8" style="padding-left: 7.5px;">
           <div class="card text-white bg-secondary mb-3">
