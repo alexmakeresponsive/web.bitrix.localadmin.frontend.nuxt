@@ -75,7 +75,7 @@ export default async function ({ store, redirect, route })
     try
     {
         await fetch(
-            'http://192.168.100.6/api/auth/check',
+            'http://192.168.100.6/local/admin/auth/check',
             {
                 method: 'POST',
                 body: formData

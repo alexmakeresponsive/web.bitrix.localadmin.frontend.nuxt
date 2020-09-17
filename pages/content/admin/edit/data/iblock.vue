@@ -41,9 +41,10 @@
           <div class="card text-white bg-secondary mb-3">
             <div class="card-header" style="display: flex; justify-content: space-between; align-items: center">
               <span>Разделы Info-блока</span>
-              <button type="button" class="btn-sm btn-secondary">
+              <NuxtLink class="btn-sm btn-secondary"
+                        :to="'/content/admin/edit/data/edit/section/iblock?id=' + idIBlock">
                 Добавить раздел
-              </button>
+              </NuxtLink>
             </div>
             <div class="card-body">
               <div class="list-group">
@@ -59,8 +60,11 @@
         <div class="col-8" style="padding-left: 7.5px;">
           <div class="card text-white bg-secondary mb-3">
             <div class="card-header" style="display: flex; justify-content: space-between; align-items: center">
-              <span>{{lang.text.element.head}}</span>
-              <button type="button" class="btn-sm btn-secondary">{{lang.text.element.button}}</button>
+              <a type="button" ></a>
+              <NuxtLink class="btn-sm btn-secondary"
+                        :to="'/content/admin/edit/data/edit/element/iblock?id=' + idIBlock">
+                {{lang.text.element.button}}
+              </NuxtLink>
             </div>
             <div class="card-body">
               <table class="table">
@@ -75,7 +79,7 @@
                 <tr v-for="element of this.data.iblock.element.list">
                   <th scope="row">{{element.ID}}</th>
                   <td>
-                    <NuxtLink :to="'/content/admin/edit/data/iblock/element.vue?id=' + idIBlock + '&idelement=' + element.ID">
+                    <NuxtLink :to="'/content/admin/edit/data/edit/element/iblock?id=' + idIBlock + '&idelement=' + element.ID">
                       {{element.NAME}}
                     </NuxtLink>
                   </td>
