@@ -9,7 +9,7 @@
               <span>{{lang.text.iblock.head}}</span>
             </div>
             <div class="card-body">
-              <table class="table">
+              <table class="table" style="margin-bottom: 0;">
                 <thead class="thead-dark">
                 <tr>
                   <th scope="col" v-for="item of lang.text.iblock.table.head">
@@ -17,16 +17,21 @@
                   </th>
                 </tr>
                 </thead>
+              </table>
+              <table class="table" v-for="item of data.iblock.list"
+                     style="margin-bottom: 0;">
                 <tbody>
-                <tr>
-                  <th scope="row">1</th>
+                <tr class="table-info">
+                  <th scope="row" style="width: 200px;">{{item.ID}}</th>
                   <td>
-                    <NuxtLink to="/content/admin/edit/data/iblock?id=1">Блог</NuxtLink>
+                    (Тип) {{item.NAME}}
                   </td>
                 </tr>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Новости</td>
+                <tr v-for="child of item.LIST_CHILD">
+                  <th scope="row" style="width: 200px;">{{child.ID}}</th>
+                  <td>
+                    <NuxtLink :to="'/content/admin/edit/data/iblock?id=' + child.ID">{{child.NAME}}</NuxtLink>
+                  </td>
                 </tr>
                 </tbody>
               </table>
@@ -66,6 +71,7 @@
 <script>
 import HeaderContent from "@/components/header/HeaderContent";
 import getTextLang from "@/shared/lang/getText";
+import IBlock from "@/shared/api/iblock";
 
 export default {
   layout: 'default',
@@ -74,6 +80,7 @@ export default {
   },
   data: () => {
     return {
+      component: {},
       lang: {
         text: {
           "iblock": {
@@ -93,16 +100,33 @@ export default {
             }
           }
         }
+      },
+      data: {
+        iblock: {
+          list: []
+        },
+        hlblock: {
+          list: []
+        },
       }
     }
   },
-  mounted: async function() {
+  beforeMount: async function() {
+    // this.$store
+    this.component.iblock = new IBlock();
+    this.component.iblock.bindStore(this.$store);
+
     const text = await getTextLang('page/content/admin/data', this.$store);
 
     if (text)
     {
       this.lang.text = text;
     }
+  },
+  mounted: async function() {
+
+    await this.component.iblock.getListIblock();
+          this.data.iblock.list = this.$store.state.api.iblock.listType;
   }
 }
 </script>

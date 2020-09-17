@@ -7,7 +7,7 @@
           <div class="card text-white bg-secondary mb-3">
             <div class="card-header">{{lang.text.block.head}}</div>
             <div class="card-body">
-              <table class="table">
+              <table class="table" style="margin-bottom: 0;">
                 <thead class="thead-dark">
                 <tr>
                   <th scope="col" v-for="item of lang.text.block.table.head">
@@ -15,16 +15,24 @@
                   </th>
                 </tr>
                 </thead>
+              </table>
+              <table class="table" v-for="item of data.iblock.list"
+                     style="margin-bottom: 0;">
                 <tbody>
-                <tr>
-                  <th scope="row">1</th>
+                <tr class="table-info">
+                  <th scope="row" style="width: 200px;">{{item.ID}}</th>
                   <td>
-                    <NuxtLink to="/content/admin/edit/data/iblock?id=1">Блог</NuxtLink>
+                    (Тип) {{item.NAME}}
                   </td>
                 </tr>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Новости</td>
+                <tr v-for="child of item.LIST_CHILD">
+                  <th scope="row" style="width: 200px;">{{child.ID}}</th>
+                  <td>
+<!--                     :to="'/content/admin/edit/data/iblock?id=' + child.ID -->
+                    <span class="link-hover"
+                              v-on:click="openIblock(child.ID)"
+                    >{{child.NAME}}</span>
+                  </td>
                 </tr>
                 </tbody>
               </table>
@@ -39,18 +47,11 @@
             </div>
             <div class="card-body">
               <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action active">
-                  Куртки
-                </a>
-                <a href="#" class="list-group-item list-group-item-action active">
-                  Штаны
-                </a>
-                <a href="#" class="list-group-item list-group-item-action active">
-                  Рукавицы
-                </a>
-                <a href="#" class="list-group-item list-group-item-action active">
-                  Сапоги
-                </a>
+                <span class="list-group-item list-group-item-action link-hover"
+                          v-for="item of this.data.iblock.section.list"
+                          v-on:click="openSection(item.ID)">
+                  {{item.NAME}}
+                </span>
               </div>
             </div>
           </div>
@@ -71,18 +72,12 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <th scope="row">1</th>
+                <tr v-for="element of this.data.iblock.element.list">
+                  <th scope="row">{{element.ID}}</th>
                   <td>
-                    <NuxtLink to="/content/admin/edit/data/iblock?id=1">
-                      Программист 2020: Терминатор отдыхает
+                    <NuxtLink :to="'/content/admin/edit/data/iblock/element.vue?id=' + idIBlock + '&idelement=' + element.ID">
+                      {{element.NAME}}
                     </NuxtLink>
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>
-                    МТИ показал трекер положений тела во сне, который работает на беспроводных сигналах
                   </td>
                 </tr>
                 </tbody>
@@ -97,6 +92,7 @@
 <script>
 import HeaderContent from "@/components/header/HeaderContent";
 import getTextLang from "@/shared/lang/getText";
+import IBlock from "@/shared/api/iblock";
 
 export default {
   layout: 'default',
@@ -105,6 +101,9 @@ export default {
   },
   data: () => {
     return {
+      idIBlock:  '',
+      idSection: '',
+      component: {},
       lang: {
         text: {
           "block": {
@@ -125,15 +124,94 @@ export default {
             }
           }
         }
+      },
+      data: {
+        iblock: {
+          list: [],
+          section: {
+            list: []
+          },
+          element: {
+            list: []
+          }
+        },
+        hlblock: {
+          list: []
+        },
       }
     }
   },
-  mounted: async function() {
+  // middleware({ store, redirect, route }) {
+  //   // console.log("id: ", route.query.id);
+  //
+  //   // store.state.api.iblock.listSection[1] = [];
+  // },
+  beforeMount: async function() {
+    this.component.iblock = new IBlock();
+
+    this.component.iblock.bindStore(this.$store);
+    this.component.iblock.bindRoute(this.$route);
+
     const text = await getTextLang('page/content/admin/edit/data/iblock', this.$store);
 
     if (text)
     {
       this.lang.text = text;
+    }
+  },
+  mounted: async function() {
+
+    let id           = Number.parseInt(this.$route.query.id);
+    let idsectionUrl = Number.parseInt(this.$route.query.idsection);
+    let idsectionQuery;
+
+    this.idIBlock  = id;
+    this.idSection = idsectionUrl;
+
+    if(!idsectionUrl)
+    {
+      this.idSection = '';
+
+      idsectionQuery = '';
+    }
+
+    await this.component.iblock.getListIblock();
+    await this.component.iblock.getListIblockSection(id);
+    await this.component.iblock.getListIblockElement(id, idsectionQuery);
+
+          this.data.iblock.list         = this.$store.state.api.iblock.listType;
+          this.data.iblock.section.list = this.$store.state.api.iblock.listSection[id];
+          this.data.iblock.element.list = this.$store.state.api.iblock.listElement[id]['root'];
+  },
+  methods: {
+    openIblock: async function (id) {
+
+      this.idIBlock = id;
+
+      if(!this.$store.state.api.iblock.listSection[id])
+      {
+        await this.component.iblock.getListIblockSection(id);
+      }
+
+      if(!this.$store.state.api.iblock.listElement[id])
+      {
+        await this.component.iblock.getListIblockElement(id, this.idSection);
+      }
+
+      this.data.iblock.section.list = this.$store.state.api.iblock.listSection[id];
+      this.data.iblock.element.list = this.$store.state.api.iblock.listElement[id]['root'];
+
+    },
+    openSection: async function (idsection) {
+
+      this.idSection = idsection;
+
+      if(!this.$store.state.api.iblock.listElement[this.idIBlock][idsection])
+      {
+        await this.component.iblock.getListIblockElement(this.idIBlock, idsection);
+      }
+
+      this.data.iblock.element.list = this.$store.state.api.iblock.listElement[this.idIBlock][idsection];
     }
   }
 }

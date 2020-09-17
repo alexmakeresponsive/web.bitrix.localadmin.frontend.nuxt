@@ -24,7 +24,7 @@ export default {
       try
       {
         await fetch(
-            'http://192.168.100.6/api/auth/logout',
+            'http://192.168.100.6/local/admin/auth/logout',
             {
               method: 'GET',
             }
