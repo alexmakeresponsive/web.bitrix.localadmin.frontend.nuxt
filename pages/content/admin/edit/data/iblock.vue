@@ -41,18 +41,23 @@
           <div class="card text-white bg-secondary mb-3">
             <div class="card-header" style="display: flex; justify-content: space-between; align-items: center">
               <span>Разделы Info-блока</span>
-              <NuxtLink class="btn-sm btn-secondary"
+              <NuxtLink class="btn-sm btn-secondary" style="margin-right: 8px;"
                         :to="'/content/admin/edit/data/edit/section/iblock?id=' + idIBlock">
                 Добавить раздел
               </NuxtLink>
             </div>
             <div class="card-body">
               <div class="list-group">
-                <span class="list-group-item list-group-item-action link-hover"
+                <div class="list-group-item list-group-item-action d-flex justify-content-between"
                           v-for="item of this.data.iblock.section.list"
-                          v-on:click="openSection(item.ID)">
-                  {{item.NAME}}
-                </span>
+                          >
+                  <span v-on:click="openSection(item.ID)" class="link-hover">{{item.NAME}}</span>
+                  <NuxtLink class="btn-sm btn-secondary"
+                            :to="'/content/admin/edit/data/edit/section/iblock?id=' + idIBlock + '&idsection=' + item.ID">
+                    Редактировать
+                  </NuxtLink>
+                </div>
+
               </div>
             </div>
           </div>
@@ -60,14 +65,14 @@
         <div class="col-8" style="padding-left: 7.5px;">
           <div class="card text-white bg-secondary mb-3">
             <div class="card-header" style="display: flex; justify-content: space-between; align-items: center">
-              <a type="button" ></a>
+              <span>Элементы</span>
               <NuxtLink class="btn-sm btn-secondary"
                         :to="'/content/admin/edit/data/edit/element/iblock?id=' + idIBlock">
                 {{lang.text.element.button}}
               </NuxtLink>
             </div>
             <div class="card-body">
-              <table class="table">
+              <table class="table table-3-2-action">
                 <thead class="thead-dark">
                 <tr>
                   <th scope="col" v-for="item of lang.text.element.table.head">
@@ -79,9 +84,13 @@
                 <tr v-for="element of this.data.iblock.element.list">
                   <th scope="row">{{element.ID}}</th>
                   <td>
-                    <NuxtLink :to="'/content/admin/edit/data/edit/element/iblock?id=' + idIBlock + '&idelement=' + element.ID">
-                      {{element.NAME}}
+                    <NuxtLink class="btn-sm btn-secondary"
+                              :to="'/content/admin/edit/data/edit/element/iblock?id=' + idIBlock + '&idelement=' + element.ID">
+                      Редактировать
                     </NuxtLink>
+                  </td>
+                  <td>
+                    {{element.NAME}}
                   </td>
                 </tr>
                 </tbody>
@@ -217,6 +226,10 @@ export default {
 
       this.data.iblock.element.list = this.$store.state.api.iblock.listElement[this.idIBlock][idsection];
     }
+  },
+  editSection()
+  {
+
   }
 }
 </script>
