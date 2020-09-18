@@ -218,9 +218,49 @@ export default class IBlock extends Vue {
         }
     }
 
-    async getIblockSection(id, idSection)
+    async getIblockSection(idSection)
     {
+        try
+        {
+            return await fetch(
+                `${this.url}?q=getIblockSection&idsection=${idSection}`,
+                {
+                    method: 'GET',
+                }
+            ).then(response => {
+                // console.log(response)
 
+                if(!response)
+                {
+                    console.log('many req per sec');
+                    return {};
+                }
+
+                if(response.status !== 200)
+                {
+                    console.log('server unavailable');
+                    return {};
+                }
+
+                return response.json();
+            })
+                .then(async data => {
+                    // console.log(data);
+
+                    if(data.status !== 200)
+                    {
+                        console.log('error in server');
+                        return;
+                    }
+
+                    return data.data;
+                });
+        }
+        catch (e)
+        {
+            console.log(e);
+            alert("catch!");
+        }
     }
 
     async updateIblockElement(idIblock, idSection, idElement, refs)
@@ -344,8 +384,120 @@ export default class IBlock extends Vue {
         }
     }
 
-    async setIblockSection(id, idSection)
+    async updateIblockSection(idIblock, idSection, refs)
     {
+        const formData = new FormData();
+              formData.append('idIblock', idIblock);
+              formData.append('idSection', idSection);
 
+        let values = {};
+
+        for(let name in refs)
+        {
+            values[name] = refs[name].value;
+        }
+
+        formData.append('values', JSON.stringify(values));
+
+        try
+        {
+            return await fetch(
+                `${this.url}?q=updateIblockSection`,
+                {
+                    method: 'POST',
+                    body: formData
+                }
+            ).then(response => {
+                // console.log(response)
+
+                if(!response)
+                {
+                    console.log('many req per sec');
+                    return {};
+                }
+
+                if(response.status !== 200)
+                {
+                    console.log('server unavailable');
+                    return {};
+                }
+
+                return response.json();
+            })
+                .then(async data => {
+                    // console.log(data);
+
+                    if(data.status !== 200)
+                    {
+                        console.log('error in server');
+                        return;
+                    }
+
+                    return data;
+                });
+        }
+        catch (e)
+        {
+            console.log(e);
+            alert("catch!");
+        }
+    }
+
+    async addIblockSection(idIblock, refs)
+    {
+        const formData = new FormData();
+              formData.append('idIblock', idIblock);
+
+        let values = {};
+
+        for(let name in refs)
+        {
+            values[name] = refs[name].value;
+        }
+
+        formData.append('values', JSON.stringify(values));
+
+        try
+        {
+            return await fetch(
+                `${this.url}?q=addIblockSection`,
+                {
+                    method: 'POST',
+                    body: formData
+                }
+            ).then(response => {
+                // console.log(response)
+
+                if(!response)
+                {
+                    console.log('many req per sec');
+                    return {};
+                }
+
+                if(response.status !== 200)
+                {
+                    console.log('server unavailable');
+                    return {};
+                }
+
+                return response.json();
+            })
+                .then(async data => {
+                    // console.log(data);
+
+                    if(data.status !== 200)
+                    {
+                        console.log('error in server');
+                        return;
+                    }
+
+                    return data;
+                });
+        }
+        catch (e)
+        {
+            console.log(e);
+            alert("catch!");
+        }
     }
 }
