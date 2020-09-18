@@ -21,7 +21,7 @@
               <form action="" method="post">
                 <div class="row mb-3">
                   <div class="col-6 text-right" style="padding-right: 7.5px;">
-                    <a class="btn btn-primary" @click="$router.go(-1)">
+                    <a class="btn btn-primary" @click="$router.replace(`/content/admin/edit/data/iblock?id=${idIBlock}`)">
                       Назад
                     </a>
                   </div>
@@ -70,7 +70,7 @@
                   </div>
                   <div class="row">
                     <div class="col-6 text-right" style="padding-right: 7.5px;">
-                      <a class="btn btn-primary" @click="$router.go(-1)">
+                      <a class="btn btn-primary" @click="$router.go(`/content/admin/edit/data/iblock?id=${idIBlock}`)">
                         Назад
                       </a>
                     </div>
