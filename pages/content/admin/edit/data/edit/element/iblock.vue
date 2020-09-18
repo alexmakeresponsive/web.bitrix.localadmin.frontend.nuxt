@@ -15,7 +15,7 @@
           <!--message-->
           <div class="card text-white bg-secondary mb-3">
             <div class="card-header text-center">
-              <span>Редактирование элемента инфоблока</span>
+              <span>{{text.head}}</span>
             </div>
             <div class="card-body">
               <form action="" method="post">
@@ -100,6 +100,17 @@ export default {
   name: "element",
   data: () => {
     return {
+      action: {
+        id: '',
+        text: {
+          add: {
+            head: "Добавление элемента инфоблока"
+          },
+          update: {
+            head: "Редактирование элемента инфоблока"
+          }
+        }
+      },
       idIBlock:  '',
       idSection: '',
       idElement: '',
@@ -126,6 +137,9 @@ export default {
             }
           }
         }
+      },
+      text: {
+        head: ''
       }
     }
   },
@@ -154,18 +168,30 @@ export default {
     }
 
 
+
     // if !id -> redirect
 
-    const d = await this.component.iblock.getIblockElement(this.idIBlock, this.idElement);
-              await this.component.iblock.getListIblockSection(this.idIBlock);
 
-    this.data.iblock.last.element = d.data;
+    if(this.idElement)
+    {
+      this.action.id = 'update';
+
+      const d = await this.component.iblock.getIblockElement(this.idIBlock, this.idElement);
+      this.data.iblock.last.element = d.data;
+    }
+    else
+    {
+      this.action.id = 'add';
+    }
+
+    this.text.head = this.action.text[this.action.id].head
+
+
+
+    await this.component.iblock.getListIblockSection(this.idIBlock);
     this.data.iblock.section.list = this.$store.state.api.iblock.listSection[this.idIBlock];
 
     const idSection = this.data.iblock.last.element.IBLOCK_SECTION_ID;
-
-
-
     if(idSection)
     {
       this.form.sectionNameCurrent = this.data.iblock.section.list[idSection]['NAME'];
@@ -179,12 +205,24 @@ export default {
   methods: {
     saveForm: async function()
     {
+      let idElement = '';
       const idSection = this.form.inputHiddenLevelCurrent;
-      const r = await this.component.iblock.setIblockElement(this.idIBlock, idSection, this.idElement, this.$refs);
+      let r;
+
+      if (this.action.id === 'add')
+      {
+         r = await this.component.iblock.addIblockElement(this.idIBlock, idSection, this.$refs);
+         idElement = r.res;
+      }
+      else
+      {
+         r = await this.component.iblock.updateIblockElement(this.idIBlock, idSection, this.idElement, this.$refs);
+         idElement = this.idElement;
+      }
 
       if(r.res)
       {
-        this.$router.push(`/content/admin/edit/data/edit/element/iblock?id=${this.idIBlock}&idsection=${idSection}&idelement=${this.idElement}`)
+        this.$router.push(`/content/admin/edit/data/edit/element/iblock?id=${this.idIBlock}&idsection=${idSection}&idelement=${idElement}`)
 
         this.alert.text = 'Элемент сохранён';
         this.alertOpen('alert-success');
