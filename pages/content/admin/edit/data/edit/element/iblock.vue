@@ -19,7 +19,7 @@
             </div>
             <div class="card-body">
               <form action="" method="post">
-                <div class="row">
+                <div class="row mb-3">
                   <div class="col-6 text-right" style="padding-right: 7.5px;">
                     <a class="btn btn-primary" @click="$router.go(-1)">
                       Назад
@@ -27,6 +27,34 @@
                   </div>
                   <div class="col-6" style="padding-left: 7.5px;">
                     <button v-on:click="saveForm" type="button" class="btn btn-primary">Сохранить</button>
+                  </div>
+                </div>
+                <div class="ro">
+                  <div class="col-4 offset-4">
+                    <div class=" dropdown">
+                      <a class="btn text-light dropdown-toggle"
+                         style="width: 100%;"
+                         data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        Раздел: <span ref="dropdownSelectLevelCurrent">{{form.sectionNameCurrent}}</span>
+                      </a>
+                      <div class="dropdown-menu" style="width: 100%;">
+                        <span class="dropdown-item"
+                              v-on:click="selectLevel($event)"
+                              data-item="0">
+                          Вехний уровень
+                        </span>
+                        <span class="dropdown-item"
+                              v-on:click="selectLevel($event)"
+                              v-for="section of data.iblock.section.list"
+                              :data-item="section.ID"
+                              >
+                          {{section.NAME}}
+                        </span>
+                      </div>
+                      <input name="inputHiddenLevel" type="hidden"
+                             ref="inputHiddenLevel"
+                             v-model="form.inputHiddenLevelCurrent">
+                    </div>
                   </div>
                 </div>
                 <fieldset>
@@ -80,9 +108,17 @@ export default {
         text: '',
       },
 
+      form: {
+        sectionNameCurrent: '',
+        inputHiddenLevelCurrent:   ''
+      },
+
       component: {},
       data: {
         iblock: {
+          section: {
+            list: []
+          },
           last: {
             element: {
               // before: {},
@@ -121,15 +157,35 @@ export default {
     // if !id -> redirect
 
     const d = await this.component.iblock.getIblockElement(this.idIBlock, this.idElement);
-          this.data.iblock.last.element = d.data;
+              await this.component.iblock.getListIblockSection(this.idIBlock);
+
+    this.data.iblock.last.element = d.data;
+    this.data.iblock.section.list = this.$store.state.api.iblock.listSection[this.idIBlock];
+
+    const idSection = this.data.iblock.last.element.IBLOCK_SECTION_ID;
+
+
+
+    if(idSection)
+    {
+      this.form.sectionNameCurrent = this.data.iblock.section.list[idSection]['NAME'];
+      this.form.inputHiddenLevelCurrent = this.form.sectionNameCurrent['ID'];
+    }
+    else
+    {
+      this.form.sectionNameCurrent = 'Верхний уровень';
+    }
   },
   methods: {
     saveForm: async function()
     {
-      const r = await this.component.iblock.setIblockElement(this.idIBlock, this.idSection, this.idElement, this.$refs);
+      const idSection = this.form.inputHiddenLevelCurrent;
+      const r = await this.component.iblock.setIblockElement(this.idIBlock, idSection, this.idElement, this.$refs);
 
       if(r.res)
       {
+        this.$router.push(`/content/admin/edit/data/edit/element/iblock?id=${this.idIBlock}&idsection=${idSection}&idelement=${this.idElement}`)
+
         this.alert.text = 'Элемент сохранён';
         this.alertOpen('alert-success');
       }
@@ -148,6 +204,11 @@ export default {
         self.alertClose();
       }, 2000)
     },
+    selectLevel: function (e)
+    {
+      this.form.inputHiddenLevelCurrent                 = e.target.attributes['data-item'].value;
+      this.$refs.dropdownSelectLevelCurrent.textContent = e.target.textContent.trim();
+    }
   },
 
 }
