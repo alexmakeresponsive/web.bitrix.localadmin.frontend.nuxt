@@ -56,7 +56,7 @@
                     :item="child"
                     :key="index"
                     :margiLeftCalc="margiLeftCalc"
-                    :idIBlock="idIBlock"
+                    :idIBlock="Number.parseInt(idIBlock)"
                 ></tree-simple>
               </ul>
             </div>
