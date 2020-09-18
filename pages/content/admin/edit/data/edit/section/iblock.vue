@@ -179,6 +179,10 @@ export default {
   methods: {
     saveForm: async function()
     {
+
+      console.log(this.idIBlock);
+      console.log(this.idSection);
+
       if (this.action.id === 'add')
       {
         const r = await this.component.iblock.addIblockSection(this.idIBlock, this.$refs);
@@ -186,7 +190,12 @@ export default {
 
         if(Number.isInteger(idSection))
         {
-          this.$router.push(`/content/admin/edit/data/edit/section/iblock?id=${this.idIBlock}&idsection=${idSection}`)
+          this.$router.replace(`/content/admin/edit/data/edit/section/iblock?id=${this.idIBlock}&idsection=${idSection}`)
+
+          this.action.id = 'update';
+          this.idSection = idSection;
+
+          this.text.head = this.action.text[this.action.id].head;
 
           this.alert.text = 'Раздел добавлен';
           this.alertOpen('alert-success');
