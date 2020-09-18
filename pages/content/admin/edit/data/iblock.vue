@@ -47,18 +47,17 @@
               </NuxtLink>
             </div>
             <div class="card-body">
-              <div class="list-group">
-                <div class="list-group-item list-group-item-action d-flex justify-content-between"
-                          v-for="item of this.data.iblock.section.list"
-                          >
-                  <span v-on:click="openSection(item.ID)" class="link-hover">{{item.NAME}}</span>
-                  <NuxtLink class="btn-sm btn-secondary"
-                            :to="'/content/admin/edit/data/edit/section/iblock?id=' + idIBlock + '&idsection=' + item.ID">
-                    Редактировать
-                  </NuxtLink>
-                </div>
-
-              </div>
+              <ul class="tree-simple-list-root">
+                <li class="tree-simple-item">
+                  Верхний уровень
+                </li>
+                <tree-simple
+                    v-for="(child, index) in data.iblock.section.list"
+                    :item="child"
+                    :key="index"
+                    :margiLeftCalc="margiLeftCalc"
+                ></tree-simple>
+              </ul>
             </div>
           </div>
         </div>
@@ -106,14 +105,43 @@
 import HeaderContent from "@/components/header/HeaderContent";
 import getTextLang from "@/shared/lang/getText";
 import IBlock from "@/shared/api/iblock";
+import TreeSimple from "@/components/tree/TreeSimple";
 
 export default {
   layout: 'default',
   components: {
-    HeaderContent
+    HeaderContent,
+    TreeSimple
   },
   data: () => {
     return {
+      margiLeftCalc: 15,
+      treeTest: {
+        16: {
+          IBLOCK_SECTION_ID: null,
+          ID: "16",
+          NAME: "Материалы"
+        },
+        17: {
+          IBLOCK_SECTION_ID: null,
+          ID: "17",
+          NAME: "Логистика",
+          CHILDS: {
+            24: {
+              IBLOCK_SECTION_ID: 17,
+              ID: "24",
+              NAME: "Lo",
+              CHILDS: {
+                29: {
+                  IBLOCK_SECTION_ID: 24,
+                  ID: "29",
+                  NAME: "N1",
+                }
+              }
+            }
+          },
+        },
+      },
       idIBlock:  '',
       idSection: '',
       component: {},
