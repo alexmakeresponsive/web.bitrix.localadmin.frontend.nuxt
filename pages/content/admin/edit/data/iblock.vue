@@ -56,6 +56,7 @@
                     :item="child"
                     :key="index"
                     :margiLeftCalc="margiLeftCalc"
+                    :idIBlock="idIBlock"
                 ></tree-simple>
               </ul>
             </div>
@@ -116,32 +117,6 @@ export default {
   data: () => {
     return {
       margiLeftCalc: 15,
-      treeTest: {
-        16: {
-          IBLOCK_SECTION_ID: null,
-          ID: "16",
-          NAME: "Материалы"
-        },
-        17: {
-          IBLOCK_SECTION_ID: null,
-          ID: "17",
-          NAME: "Логистика",
-          CHILDS: {
-            24: {
-              IBLOCK_SECTION_ID: 17,
-              ID: "24",
-              NAME: "Lo",
-              CHILDS: {
-                29: {
-                  IBLOCK_SECTION_ID: 24,
-                  ID: "29",
-                  NAME: "N1",
-                }
-              }
-            }
-          },
-        },
-      },
       idIBlock:  '',
       idSection: '',
       component: {},

@@ -9,7 +9,7 @@
                     {{item.NAME}}</span>
       </div>
       <NuxtLink class="btn-sm btn-secondary"
-                :to="'/content/admin/edit/data/edit/section/iblock?id=' + idIblock + '&idsection=' + item.ID">
+                :to="'/content/admin/edit/data/edit/section/iblock?id=' + idIBlock + '&idsection=' + item.ID">
         Редактировать
       </NuxtLink>
     </div>
@@ -29,11 +29,12 @@ export default {
   name: "tree-simple",
   props: {
     item: Object,
-    margiLeftCalc: Number
+    margiLeftCalc: Number,
+    idIBlock: Number,
   },
   data: function () {
     return {
-      idIblock: this.$route.query.id
+
     }
   }
 }
