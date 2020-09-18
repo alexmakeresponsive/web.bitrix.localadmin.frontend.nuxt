@@ -85,7 +85,7 @@
                   <th scope="row">{{element.ID}}</th>
                   <td>
                     <NuxtLink class="btn-sm btn-secondary"
-                              :to="'/content/admin/edit/data/edit/element/iblock?id=' + idIBlock + '&idelement=' + element.ID">
+                              :to="'/content/admin/edit/data/edit/element/iblock?id=' + idIBlock + '&idsection=' + idSection +  '&idelement=' + element.ID">
                       Редактировать
                     </NuxtLink>
                   </td>

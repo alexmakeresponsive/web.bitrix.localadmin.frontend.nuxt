@@ -62,7 +62,22 @@ export default {
   components: {
     HeaderContent
   },
-  name: "element"
+  name: "element",
+  mounted: async function() {
+    let id        = Number.parseInt(this.$route.query.id);
+    let idSection = Number.parseInt(this.$route.query.idsection);
+
+    // if !id -> redirect
+
+    this.component.iblock = new IBlock();
+    await this.component.iblock.getIblockSection(id, idSection);
+  },
+  methods: {
+    saveForm: async function()
+    {
+      await this.component.iblock.setIblockSection(id, idSection);
+    }
+  }
 }
 </script>
 

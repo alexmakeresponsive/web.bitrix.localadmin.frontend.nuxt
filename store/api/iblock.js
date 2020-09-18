@@ -6,6 +6,7 @@ export const state = () => ({
     listElement: {
 
     },
+    lastElement: {}
 })
 
 export const mutations = {
@@ -28,5 +29,9 @@ export const mutations = {
         state.listElement[data.id][data.idsection] = data.data;
 
         // console.log(state.listElement);
+    },
+    updateLastElement(state, data)
+    {
+        state.lastElement = data.data;
     },
 }

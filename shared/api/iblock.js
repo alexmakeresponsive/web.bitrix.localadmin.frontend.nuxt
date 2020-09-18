@@ -171,4 +171,121 @@ export default class IBlock extends Vue {
             alert("catch!");
         }
     }
+
+    async getIblockElement(id, idElement)
+    {
+        try
+        {
+            return await fetch(
+                `${this.url}?q=getIblockElement&id=` + id + '&idElement=' + idElement,
+                {
+                    method: 'GET',
+                }
+            ).then(response => {
+                // console.log(response)
+
+                if(!response)
+                {
+                    console.log('many req per sec');
+                    return {};
+                }
+
+                if(response.status !== 200)
+                {
+                    console.log('server unavailable');
+                    return {};
+                }
+
+                return response.json();
+            })
+                .then(async data => {
+                    // console.log(data);
+
+                    if(data.status !== 200)
+                    {
+                        console.log('error in server');
+                        return;
+                    }
+
+                    return data;
+                    // this.store.commit('api/iblock/updateLastElement', data);
+                });
+        }
+        catch (e)
+        {
+            console.log(e);
+            alert("catch!");
+        }
+    }
+
+    async getIblockSection(id, idSection)
+    {
+
+    }
+
+    async setIblockElement(idIblock, idSection, idElement, refs)
+    {
+        const formData = new FormData();
+              formData.append('idIblock', idIblock);
+              formData.append('idSection', idSection);
+              formData.append('idElement', idElement);
+
+        let values = {};
+
+        for(let name in refs)
+        {
+            values[name] = refs[name].value;
+        }
+
+        // formData.append(name, refs[name].value);
+        formData.append('values', JSON.stringify(values));
+
+        try
+        {
+            return await fetch(
+                `${this.url}?q=setIblockElement`,
+                {
+                    method: 'POST',
+                    body: formData
+                }
+            ).then(response => {
+                // console.log(response)
+
+                if(!response)
+                {
+                    console.log('many req per sec');
+                    return {};
+                }
+
+                if(response.status !== 200)
+                {
+                    console.log('server unavailable');
+                    return {};
+                }
+
+                return response.json();
+            })
+                .then(async data => {
+                    // console.log(data);
+
+                    if(data.status !== 200)
+                    {
+                        console.log('error in server');
+                        return;
+                    }
+
+                    return data;
+                });
+        }
+        catch (e)
+        {
+            console.log(e);
+            alert("catch!");
+        }
+    }
+
+    async setIblockSection(id, idSection)
+    {
+
+    }
 }
