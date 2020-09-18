@@ -214,6 +214,7 @@ export default {
       this.data.iblock.section.list = this.$store.state.api.iblock.listSection[id];
       this.data.iblock.element.list = this.$store.state.api.iblock.listElement[id]['root'];
 
+      this.$router.replace(`/content/admin/edit/data/iblock?id=${id}`)
     },
     openSection: async function (idsection) {
 
