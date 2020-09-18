@@ -18,6 +18,7 @@
           v-for="(child, index) in item.CHILDS"
           :item="child"
           :key="index"
+          :idIBlock="idIBlock"
           :margiLeftCalc="margiLeftCalc * 2"
       ></tree-simple>
     </ul>
