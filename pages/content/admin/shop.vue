@@ -25,7 +25,7 @@
             </div>
             <div class="card-body">
               <div class="list-group">
-                <NuxtLink to="/content/admin/edit/shop/catalog" class="list-group-item list-group-item-action"
+                <NuxtLink :to="{path: uri.shop.menu.items[0].to}" class="list-group-item list-group-item-action"
                           style="margin-bottom: -1px"
                           v-if="lang.text.shop.menu.items[0]"
                 >
@@ -35,12 +35,14 @@
                    v-for="(item, index)  of lang.text.shop.menu.items"
                    v-if="index !== 0"
                 >
-                  <a href="#" class="list-group-item list-group-item-action"
+                  <NuxtLink :to="{path: uri.shop.menu.items[index].to}" class="list-group-item list-group-item-action"
+                            v-if="uri.shop.menu.items[index]"
                   >
-                    {{item.title}}</a>
-                  <a href="#" class="list-group-item list-group-item-action" v-for="child of item.childs">
+                    {{item.title}}
+                  </NuxtLink>
+                  <!--<a href="#" class="list-group-item list-group-item-action" v-for="child of item.childs">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{child}}
-                  </a>
+                  </a>-->
                 </div>
 
               </div>
@@ -79,6 +81,70 @@ export default {
 
               ]
             }
+          }
+        }
+      },
+      uri: {
+        "marketing": {
+          "head": "",
+          "menu": {
+            "items": [
+
+            ]
+          }
+        },
+        "shop": {
+          "head": "",
+          "menu": {
+            "items": [
+              {
+                to: '/content/admin/edit/shop/catalog',
+                childs: [
+
+                ]
+              },
+              {
+                to: '/content/admin/edit/shop/order/history/order',
+                childs: [
+                    '/content/admin/edit/shop/order/history/order',
+                    '/content/admin/edit/shop/order/history/pay',
+                ]
+              },
+              {
+                to: '/content/admin/edit/shop/store/document',
+                childs: [
+                  '/content/admin/edit/shop/store/document',
+                  '/content/admin/edit/shop/store/provider',
+                  '/content/admin/edit/shop/store/list',
+                ]
+              },
+              {
+                to: '/content/admin/edit/shop/delivery',
+                childs: [
+
+                ]
+              },
+              {
+                to: '/content/admin/edit/shop/payment',
+                childs: [
+
+                ]
+              },
+              {
+                to: '/content/admin/edit/shop/price/type',
+                childs: [
+                  '/content/admin/edit/shop/price/type',
+                  '/content/admin/edit/shop/price/round',
+                  '/content/admin/edit/shop/price/over',
+                ]
+              },
+              {
+                to: '/content/admin/edit/shop/price/measure',
+                childs: [
+
+                ]
+              }
+            ]
           }
         }
       }
