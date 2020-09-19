@@ -189,7 +189,11 @@
                   "title": "Catalogs"
                 },
                 {
-                  "title": "Orders"
+                  "title": "Orders",
+                  "childs": [
+                    "Order history",
+                    "Pay history"
+                  ]
                 },
                 {
                   "title": "Inventory control",
@@ -206,7 +210,12 @@
                   "title": "Pay systems"
                 },
                 {
-                  "title": "Prices"
+                  "title": "Prices",
+                  "childs": [
+                    "Type",
+                    "Rounding",
+                    "Price over"
+                  ]
                 },
                 {
                   "title": "Measures"
