@@ -3,22 +3,7 @@
     <header-content></header-content>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-6" style="padding-right: 7.5px;">
-          <div class="card text-white bg-secondary mb-3">
-            <div class="card-header" style="display: flex; justify-content: space-between; align-items: center">
-              <span>{{lang.text.marketing.head}}</span>
-            </div>
-            <div class="card-body">
-              <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action" v-for="item of lang.text.marketing.menu.items">
-                  {{item}}
-                </a>
-              </div>
-            </div>
-          </div>
-
-        </div>
-        <div class="col-6" style="padding-left: 7.5px;">
+        <div class="col-4" style="padding-right: 7.5px;">
           <div class="card text-white bg-secondary mb-3">
             <div class="card-header" style="display: flex; justify-content: space-between; align-items: center">
               <span>{{lang.text.shop.head}}</span>
@@ -32,13 +17,22 @@
                   {{lang.text.shop.menu.items[0].title}}
                 </NuxtLink>
                 <div style="margin-bottom: -1px"
-                   v-for="(item, index)  of lang.text.shop.menu.items"
-                   v-if="index !== 0"
+                     v-for="(item, index)  of lang.text.shop.menu.items"
+                     :key="index + '-parent'"
+                     v-if="index !== 0"
                 >
-                  <NuxtLink :to="{path: uri.shop.menu.items[index].to}" class="list-group-item list-group-item-action"
-                            v-if="uri.shop.menu.items[index]"
+                  <NuxtLink v-if="uri.shop.menu.items[index]"
+                            :to="{path: uri.shop.menu.items[index].to}"
+                            class="list-group-item list-group-item-action"
                   >
                     {{item.title}}
+                  </NuxtLink>
+                  <NuxtLink v-for="(child, indexChild) of item.childs"
+                            :key="indexChild + '-child-' + uri.shop.menu.items[index].key"
+                            :to="{path: uri.shop.menu.items[index].childs[indexChild]}"
+                            class="list-group-item list-group-item-action"
+                            style="margin-left: 15px;">
+                    {{child}}
                   </NuxtLink>
                 </div>
 
@@ -46,17 +40,23 @@
             </div>
           </div>
         </div>
+        <div class="col-8" style="padding-left: 7.5px;">
+          <!--content-->
+          <Nuxt />
+          <!--content-->
+        </div>
       </div>
     </div>
   </div>
 </template>
+
 <script>
 import HeaderContent from "@/components/header/HeaderContent";
 import getTextLang from "@/shared/lang/getText";
-import ShopUri from "@/pages/content/admin/shop.uri";
+import ShopUri from "@/pages/content/admin/shop.uri"
 
 export default {
-  layout: 'default',
+  name: 'shop',
   components: {
     HeaderContent
   },
@@ -92,7 +92,9 @@ export default {
     {
       this.lang.text = text;
     }
+  },
+  methods: {
+
   }
 }
 </script>
-
