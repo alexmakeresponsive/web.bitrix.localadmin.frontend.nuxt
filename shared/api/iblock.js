@@ -66,6 +66,56 @@ export default class IBlock extends Vue {
         }
     }
 
+    async getListCatalogIblock()
+    {
+        if(this.store.state.api.iblock.catalogListType.length)
+        {
+            return
+        }
+
+        try
+        {
+            await fetch(
+                `${this.url}?q=getListCatalogIblock`,
+                {
+                    method: 'GET',
+                }
+            ).then(response => {
+                // console.log(response)
+
+                if(!response)
+                {
+                    console.log('many req per sec');
+                    return {};
+                }
+
+                if(response.status !== 200)
+                {
+                    console.log('server unavailable');
+                    return {};
+                }
+
+                return response.json();
+            })
+                .then(async data => {
+                    // console.log(data);
+
+                    if(data.status !== 200)
+                    {
+                        console.log('error in server');
+                        return;
+                    }
+
+                    this.store.commit('api/iblock/updateCatalogListType', data.data);
+                });
+        }
+        catch (e)
+        {
+            console.log(e);
+            alert("catch!");
+        }
+    }
+
     async getListIblockSection(id)
     {
         // const id = this.route.query.id

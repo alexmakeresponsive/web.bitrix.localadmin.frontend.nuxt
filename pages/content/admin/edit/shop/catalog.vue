@@ -83,6 +83,7 @@
 <script>
 import HeaderContent from "@/components/header/HeaderContent";
 import getTextLang from "@/shared/lang/getText";
+import IBlock from "@/shared/api/iblock";
 
 export default {
   layout: 'default',
@@ -91,6 +92,7 @@ export default {
   },
   data: () => {
     return {
+      component: {},
       lang: {
         text: {
           "block": {
@@ -113,6 +115,12 @@ export default {
       }
     }
   },
+  beforeMount: async function() {
+    this.component.iblock = new IBlock();
+
+    this.component.iblock.bindStore(this.$store);
+    this.component.iblock.bindRoute(this.$route);
+  },
   mounted: async function() {
     const text = await getTextLang('page/content/admin/edit/shop/catalog', this.$store);
 
@@ -120,6 +128,8 @@ export default {
     {
       this.lang.text = text;
     }
+
+                await this.component.iblock.getListCatalogIblock();
   }
 }
 </script>

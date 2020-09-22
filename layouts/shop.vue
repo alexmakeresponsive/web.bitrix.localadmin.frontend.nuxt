@@ -31,8 +31,8 @@
                             :key="indexChild + '-child-' + uri.shop.menu.items[index].key"
                             :to="{path: uri.shop.menu.items[index].childs[indexChild]}"
                             class="list-group-item list-group-item-action"
-                            style="margin-left: 15px;">
-                    {{child}}
+                            >
+                     <span style="margin-left: 15px;">{{child}}</span>
                   </NuxtLink>
                 </div>
 

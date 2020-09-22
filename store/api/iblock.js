@@ -1,5 +1,7 @@
 export const state = () => ({
     listType: [],
+    catalogListType: [],
+
     listSection: {
 
     },
@@ -13,6 +15,10 @@ export const mutations = {
     updateListType(state, l)
     {
         state.listType = l;
+    },
+    updateCatalogListType(state, l)
+    {
+        state.catalogListType = l;
     },
     updateListSection(state, data)
     {
